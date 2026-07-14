@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500;600;700;800&amp;family=Sora:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#1e293b",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#0f172a",
+                        "on-secondary-fixed": "#042f2e",
+                        "surface-tint": "#0d9488",
+                        "tertiary": "#be123c",
+                        "on-error": "#ffffff",
+                        "background": "#f8fafc",
+                        "on-tertiary-fixed": "#450a0a",
+                        "inverse-primary": "#99f6e4",
+                        "primary-fixed-dim": "#5eead4",
+                        "secondary": "#0f766e",
+                        "tertiary-container": "#450a0a",
+                        "surface": "#f8fafc",
+                        "tertiary-fixed-dim": "#fecaca",
+                        "surface-dim": "#e2e8f0",
+                        "surface-bright": "#ffffff",
+                        "primary-fixed": "#ccfbf1",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#f0fdfa",
+                        "error-container": "#fee2e2",
+                        "on-error-container": "#991b1b",
+                        "tertiary-fixed": "#fef2f2",
+                        "surface-container-high": "#f1f5f9",
+                        "on-primary-fixed-variant": "#134e4a",
+                        "on-primary-fixed": "#042f2e",
+                        "on-secondary-fixed-variant": "#115e59",
+                        "secondary-fixed-dim": "#99f6e4",
+                        "inverse-on-surface": "#f8fafc",
+                        "surface-variant": "#f1f5f9",
+                        "outline-variant": "#cbd5e1",
+                        "outline": "#64748b",
+                        "surface-container-highest": "#e2e8f0",
+                        "error": "#dc2626",
+                        "primary-container": "#042f2e",
+                        "on-tertiary-container": "#fecaca",
+                        "on-surface-variant": "#475569",
+                        "surface-container-low": "#f8fafc",
+                        "secondary-container": "#0f766e",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#99f6e4",
+                        "primary": "#0d9488",
+                        "secondary-fixed": "#f0fdfa",
+                        "surface-container": "#f1f5f9",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#7f1d1d",
+                        "on-background": "#0f172a",
+                        "brand-teal": "#0d9488",
+                        "brand-berry": "#be123c",
+                        "brand-orange": "#ea580c",
+                        "brand-indigo": "#4338ca"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem",
+                        "xl": "1.25rem",
+                        "2xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "stack-lg": "24px",
+                        "stack-md": "16px",
+                        "gutter": "24px",
+                        "container-padding": "32px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "data-mono": ["Geist"],
+                        "body-md": ["Sora", "Inter"],
+                        "h2": ["Geist"],
+                        "h1": ["Geist"],
+                        "display": ["Geist"],
+                        "body-lg": ["Sora", "Inter"],
+                        "label-sm": ["Geist"]
+                    },
+                    "fontSize": {
+                        "data-mono": ["14px", {"lineHeight": "1", "letterSpacing": "0", "fontWeight": "500"}],
+                        "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "h2": ["20px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "h1": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+                        "display": ["36px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "900"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        body {
+            background-color: #f8fafc;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(13, 148, 136, 0.08) 0px, transparent 50%),
+                radial-gradient(at 50% 0%, rgba(190, 18, 60, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(234, 88, 12, 0.08) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(67, 56, 202, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(13, 148, 136, 0.08) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+        .infographic-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+        }
+        .infographic-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 25px 50px -12px rgba(13, 148, 136, 0.15);
+        }
+        .icon-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .icon-container::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: rotate(45deg);
+            transition: 0.6s;
+        }
+        .infographic-card:hover .icon-container::after {
+            left: 100%;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-full h-20 bg-white/70 backdrop-blur-xl border-b border-outline-variant/30 flex justify-between items-center px-container-padding z-50">
+<div class="flex items-center gap-stack-md">
+<div class="bg-brand-teal p-2.5 rounded-xl shadow-lg shadow-brand-teal/20">
+<span class="material-symbols-outlined text-on-primary text-2xl" data-icon="corporate_fare">corporate_fare</span>
+</div>
+<div>
+<h1 class="font-display text-h1 font-black tracking-tighter text-on-surface">Hamed Al Karbi</h1>
+<p class="text-[10px] text-brand-teal font-bold uppercase tracking-[0.2em] -mt-1">Property Management</p>
+</div>
+</div>
+<div class="flex items-center gap-stack-lg">
+<div class="flex items-center gap-stack-sm">
+<button class="w-10 h-10 flex items-center justify-center hover:bg-surface-container-low rounded-xl transition-all group relative">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-brand-teal" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-brand-berry rounded-full ring-2 ring-white"></span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center hover:bg-surface-container-low rounded-xl transition-all group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-brand-teal" data-icon="mail">mail</span>
+</button>
+</div>
+<div class="flex items-center gap-stack-md border-l border-outline-variant/50 pl-stack-lg">
+<div class="text-right hidden sm:block">
+<p class="font-label-sm text-on-surface">Hamed Al Karbi</p>
+<p class="text-[10px] text-brand-teal font-bold uppercase tracking-widest">Administrator</p>
+</div>
+<div class="relative">
+<img alt="User Profile" class="w-11 h-11 rounded-xl border-2 border-brand-teal/20 object-cover shadow-md" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpiQxgkm7SOo2yFojT0J2TzyVL8AOkllLZNjIqVhJYbVM8NZpztnJOe0uT-OG5UatvC2_FONSbEmPu5n8pWQ8Wnajb9SyCd0zXgLAD0rH8eXF-aB14qoF62RYQSfDI-EpS_JbAPmyg39ZxeE0RZgITD2bocHs-ZcL8Y_e3yMxH_BcwWkg5tjHBC6-71iGmiC2XhtL2wira7P58WBgDTs7Amiaacme-rU_2GylvMpQZ8vVYMwSis8DP6PQpKz-B8wlsnwDBSgjtbI8"/>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-white"></div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Navigation Canvas -->
+<main class="pt-32 pb-16 px-container-padding min-h-screen flex flex-col items-center">
+<div class="w-full max-w-7xl">
+<div class="mb-16 text-center">
+<h2 class="font-display text-display text-on-surface mb-4 tracking-tight">Navigation Hub</h2>
+<div class="h-1.5 w-24 bg-gradient-to-r from-brand-teal to-brand-berry mx-auto rounded-full mb-6"></div>
+<p class="font-body-lg text-on-surface-variant max-w-2xl mx-auto">Welcome back, Administrator. Select a specialized module to manage your property portfolio with precision.</p>
+</div>
+<!-- Vibrant Infographic Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+<!-- Dashboard -->
+<a class="infographic-card group relative p-8 rounded-2xl shadow-sm hover:shadow-2xl flex flex-col items-center text-center overflow-hidden border border-white/60" href="#">
+<div class="icon-container w-32 h-32 rounded-3xl bg-white flex items-center justify-center mb-8 shadow-xl shadow-teal-500/10 group-hover:scale-105 transition-transform overflow-hidden">
+<img alt="Dashboard" class="w-full h-full object-contain p-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCT-RWUJ_LvzP4ba_8sOOHBs1KYpDEbyFy0EpenkDU2x7f7YvFTo4plrNlz2Icq3IDpBJILqalngf_qBurvBSqwu6S21WXSmX9ZdVvigoaHsRUp-ADz1UyeJbu-pTDAz_-Ln_CnpgXREIrpjZSBfb5u8OVFzYzHVG2sQrZAV2i-ydZz06EFEztzWGbQoBouhK2QnJOwJohZT0cLguH7FcEU0GMdHaW6mKZKsWJWAMVjoo3khoLOlVhOpiQlflahoCiRZsGL2Jnq6Is"/>
+</div>
+<h3 class="font-display text-h2 text-on-surface mb-3">Dashboard</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Live performance tracking and analytical snapshots.</p>
+</a>
+<!-- Properties -->
+<a class="infographic-card group relative p-8 rounded-2xl shadow-sm hover:shadow-2xl flex flex-col items-center text-center overflow-hidden border border-white/60" href="#">
+<div class="icon-container w-32 h-32 rounded-3xl bg-white flex items-center justify-center mb-8 shadow-xl shadow-emerald-600/10 group-hover:scale-105 transition-transform overflow-hidden">
+<img alt="Properties" class="w-full h-full object-contain p-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrAYbO2HLNOcQLPCONNkcc2c3sVm3nsVtS9e_E5locE-arLR6FIRIMvX1uKQfY1S49rVW_potFqn-WfLq0eHEsNzeyl8bG5DA9tUANdOwP940cuZKHljKGMIY6KCDuBb6lSrJPFbQUbNEEK_BrN9_v26rZWRPkZGhQuAIh7alZSlxy0L5fFQdhPq30FnzSWZWew4SeJu2TIfOMEm4iyxI6FSnEQC6Ju-UR9zRY7icezdrTETizSWfP4fNYUD_WRS1kKsMemHQxIHY"/>
+</div>
+<h3 class="font-display text-h2 text-on-surface mb-3">Properties</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Portfolio inventory and high-level asset overview.</p>
+</a>
+<!-- Buildings -->
+<a class="infographic-card group relative p-8 rounded-2xl shadow-sm hover:shadow-2xl flex flex-col items-center text-center overflow-hidden border border-white/60" href="#">
+<div class="icon-container w-32 h-32 rounded-3xl bg-white flex items-center justify-center mb-8 shadow-xl shadow-orange-600/10 group-hover:scale-105 transition-transform overflow-hidden">
+<img alt="Buildings" class="w-full h-full object-contain p-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA05IuYtHlE6TxmnknwkpZzc_guzrpJuStam-ZWty9ykyfndBO-ivNYwSRrkoN0PAhlKgI5NY83rMKP3V8CMCydRe0AtmFJ5nLqgDegD2iME1YeJEgkts2cSLkaEOZQj6GPlVa-0XCZ2CeFyh93_-BAB2S9t9j12LqaJn0ZS9AZjoXib5pCa2ErKwYhdHQEb_Q1F5sUgVWPrGNeRN9XWvrJyeQyxhg5LpLA_IP2FdMMBruASPCAVtuDjzmNsDqjFAaPA-RrNswxLDM"/>
+</div>
+<h3 class="font-display text-h2 text-on-surface mb-3">Buildings</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Structural management and facilities operation.</p>
+</a>
+<!-- Tenants -->
+<a class="infographic-card group relative p-8 rounded-2xl shadow-sm hover:shadow-2xl flex flex-col items-center text-center overflow-hidden border border-white/60" href="#">
+<div class="icon-container w-32 h-32 rounded-3xl bg-white flex items-center justify-center mb-8 shadow-xl shadow-indigo-600/10 group-hover:scale-105 transition-transform overflow-hidden">
+<img alt="Tenants" class="w-full h-full object-contain p-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTS175sWJ3BRWbqk2Wc5uVSyQnCciSjogYLRKw8XkyXYq68LgUCv4QjGE774Y4KhngNIHAaqWcUs6Fx_iFk0uPYa_DQLk4PIktnv2aSLzQDKrAP5_FU1XcKxpVk-APs6LZ9Zcnx1s7lmlpBe1zIoIGGKmG00oh4PO-vD5CaNbz6utPqk-tSAClvP5gmsw0bBFFsv5OlUonSDH7RerwC7PD4n65LtFYKn6Ta2uAj_2neySh-QwFmSC0pTnUIsy89yN6KbDhhjiQ3sk"/>
+</div>
+<h3 class="font-display text-h2 text-on-surface mb-3">Tenants</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Resident profiles and CRM communication tools.</p>
+</a>
+<!-- Contracts -->
+<a class="infographic-card group relative p-8 rounded-2xl shadow-sm hover:shadow-2xl flex flex-col items-center text-center overflow-hidden border border-white/60" href="#">
+<div class="icon-container w-32 h-32 rounded-3xl bg-white flex items-center justify-center mb-8 shadow-xl shadow-rose-600/10 group-hover:scale-105 transition-transform overflow-hidden">
+<img alt="Contracts" class="w-full h-full object-contain p-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_n6aMBdQmuKqNutXJL707z8MepgrNPOUlMvzF_4qAzCUIstroHdXOVWZfb9I8WtPHZMBIrAcH78Mt3l4EvA5CMg3bW4aVUpdbNeHmrrzA5PHrHVqJj9MUViIQn6jQ-3uU6AK667auLf60X-VTRE3DWPknzwDLF5YbGyVxLy6DuYy8DC3vWcJNhA9PQuy96Ud1qDUSTTRlT0U8g4C8drHKdRkD9fkAD2tmhICJFdAHDHEJ0VkkbWzipKPyOTjYmbm8XvttMLy8B10"/>
+</div>
+<h3 class="font-display text-h2 text-on-surface mb-3">Contracts</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Lease management and legal documentation.</p>
+</a>
+<!-- Finance -->
+<a class="infographic-card group relative p-8 rounded-2xl shadow-sm hover:shadow-2xl flex flex-col items-center text-center overflow-hidden border border-white/60" href="#">
+<div class="icon-container w-32 h-32 rounded-3xl bg-white flex items-center justify-center mb-8 shadow-xl shadow-cyan-600/10 group-hover:scale-105 transition-transform overflow-hidden">
+<img alt="Finance" class="w-full h-full object-contain p-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlNhjTG2FpzNfSxKPdiFZ4tZ1VAszoCssKH6xJJeJLjpIqAOiP5XN9AeSulogEu80BARZsMopi13LwxoewK_5xzevlquZ0xfJ3xdNE2ULjoxv1hwWMIshcfPjtLy3qvDaNoP_o-9BxzZ4LarKDhD1nHLz7bjK7jwDpW_7-TAKnZ99qpa-t1mp_smhl8jSgM1Fe0WktWMxU3VDsqhm4_to6UoVRB3ffb1EuO-k-UBgOm-EXVLifOz8NjQuuhNFOsM_lExwyGCvKPwc"/>
+</div>
+<h3 class="font-display text-h2 text-on-surface mb-3">Finance</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Collections, disbursements, and financial audits.</p>
+</a>
+<!-- Maintenance -->
+<a class="infographic-card group relative p-8 rounded-2xl shadow-sm hover:shadow-2xl flex flex-col items-center text-center overflow-hidden border border-white/60" href="#">
+<div class="icon-container w-32 h-32 rounded-3xl bg-white flex items-center justify-center mb-8 shadow-xl shadow-slate-700/10 group-hover:scale-105 transition-transform overflow-hidden">
+<img alt="Maintenance" class="w-full h-full object-contain p-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtrYy1ceRPI987wylmzL7_2gqAnpmXhk5UJedSUbMK7JV7x9M5Jj3NY54hXxAytKkF58yny9qxVgOnSfsXOwB-_UMGrrqzTqawsvqFy_oFvCW2sb3a2qNpBnrug6CBeu5JcvPfx8AwD_jXXy-OHYM8HfLQKrcM0o8mFUDf7_sIVm3X0d6HcKqCtdnubZfnQcCqba0MuGTTlnIDanLJtF_hr8vToS3KrA4jlwEnXCq50QRvgkhHXTBz_9dURxUjB_yraxWc90GVEDk"/>
+</div>
+<h3 class="font-display text-h2 text-on-surface mb-3">Maintenance</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Work order flow and technical request tracking.</p>
+</a>
+<!-- Contracting -->
+<a class="infographic-card group relative p-8 rounded-2xl shadow-sm hover:shadow-2xl flex flex-col items-center text-center overflow-hidden border border-white/60" href="#">
+<div class="icon-container w-32 h-32 rounded-3xl bg-white flex items-center justify-center mb-8 shadow-xl shadow-fuchsia-700/10 group-hover:scale-105 transition-transform overflow-hidden">
+<img alt="Contracting" class="w-full h-full object-contain p-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1Spg2z6kRvgw7S2_FmLRAtbuQ3UCC2DaHG3GiyC9h6rCoTvPNpO3lMlxQQxhbtoQR9ztzTS6vlyd4Sfk6g3XOxm3YqBlBhWhRPpA2jdYLWXfTpWCwfq2K0QZbtHJ3EFN2LgbRwVUGUgYImHuf2iARceMnI47pgQPa_t_wFwSEPlwuPKf9oKRbD5ipsCwHT4joAevyK86wcBqyT2WZ_FNdeIM-libF04T5foQIwGVEXjWR7xMZeO8vIS8DT6-qFqcaZT-mRVNGaqQ"/>
+</div>
+<h3 class="font-display text-h2 text-on-surface mb-3">Contracting</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Vendor management and large scale projects.</p>
+</a>
+<!-- Staff -->
+<a class="infographic-card group relative p-8 rounded-2xl shadow-sm hover:shadow-2xl flex flex-col items-center text-center overflow-hidden border border-white/60" href="#">
+<div class="icon-container w-32 h-32 rounded-3xl bg-white flex items-center justify-center mb-8 shadow-xl shadow-teal-700/10 group-hover:scale-105 transition-transform overflow-hidden">
+<img alt="Staff" class="w-full h-full object-contain p-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhkfv5a6zlzc3selmd7AR5Tsvwu8o1LoAZaAWOnw0d_fNkiTo_jqsqHUT7_r8ESZBOTfR66AH-oB3sX78ucHFu_jpB7-Ne-feYUvhGL6FoKyhNsm4VY-4obLbox17m1ZZ_NTCXOQ-i6PFLtCLM1cRxim-cYS7mpA9h6DHCqYrU8FLZXHZ76SHTKyrYda6id-7D5PzLh5YIqw-vbYUj4XKsQLRCyJoXnGAmWuUelKYAPCGQhzPFCYix2dqZAFM6hMxIBeR9C7JHo5Q"/>
+</div>
+<h3 class="font-display text-h2 text-on-surface mb-3">Staff</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Team management and RBAC permissions.</p>
+</a>
+<!-- Reports -->
+<a class="infographic-card group relative p-8 rounded-2xl shadow-sm hover:shadow-2xl flex flex-col items-center text-center overflow-hidden border border-white/60" href="#">
+<div class="icon-container w-32 h-32 rounded-3xl bg-white flex items-center justify-center mb-8 shadow-xl shadow-blue-600/10 group-hover:scale-105 transition-transform overflow-hidden">
+<img alt="Reports" class="w-full h-full object-contain p-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-JpswwZhhi2oN7O8iMkJx-3sm7amH--epxSHow2TtDkypWTW1nO6F7cyM7IMJilzXdADwm4B5bQLyTmcr8PMvvATltN6rprpFBkm1A7K2oKu3oxxYY6Np9un2g9wIJDEL1EY1N27foY3bYsRDRcPzJfgXOVu0XSFtT1Ej0DmVtVZu7LB0YMsBP2eDI5bCF1FXJ3OSjF5TURGBg5uS_KHSPsYK_4_VLS6sIsvO3tEeqp9x0wl9hBvWCkvoKesmk-A-1A6MM5x4bnc"/>
+</div>
+<h3 class="font-display text-h2 text-on-surface mb-3">Reports</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Comprehensive data exports and BI analysis.</p>
+</a>
+<!-- Profit & Loss -->
+<a class="infographic-card group relative p-8 rounded-2xl shadow-sm hover:shadow-2xl flex flex-col items-center text-center overflow-hidden border border-white/60" href="#">
+<div class="icon-container w-32 h-32 rounded-3xl bg-white flex items-center justify-center mb-8 shadow-xl shadow-orange-600/10 group-hover:scale-105 transition-transform overflow-hidden">
+<img alt="Profit &amp; Loss" class="w-full h-full object-contain p-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLCHuyj97nkNUH3d6kPF-gcl6k1aJa7HSYdFse1cX3i1_fHNB3m0IC7BcZGkxH14Kd6KRBfu_PTAXQoj9fruPU4h6HqJHAYnk16OfJM_dYbWZPf0znfvx2EFCKNG7M01hUApBBJIuuQiGoD6Cy8su8T6epgiAek-di_CHSaqUQYw--2y4DIo0XGjKAHQGSv6B-fS5-edQtPK364FtGL_Jy6j8d4ZCY5CXnosSCFyiViJQA8BPhprFVxBJtnkHBgsFdLYQflbXUFu0"/>
+</div>
+<h3 class="font-display text-h2 text-on-surface mb-3">Profit &amp; Loss</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Revenue analysis and expense management.</p>
+</a>
+<!-- Settings -->
+<a class="infographic-card group relative p-8 rounded-2xl shadow-sm hover:shadow-2xl flex flex-col items-center text-center overflow-hidden border border-white/60" href="#">
+<div class="icon-container w-32 h-32 rounded-3xl bg-white flex items-center justify-center mb-8 shadow-xl shadow-slate-400/10 group-hover:scale-105 transition-transform overflow-hidden">
+<img alt="Settings" class="w-full h-full object-contain p-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyYCVsAxj0VqSsgjCLDRg9fLr58v4mTSfS8AfCE5gg5-wF69CdDrsH9T5dQos_89U_rXWPLWXK_PJDGSPOZ2DWhtUPtoPhmW8aPfw89QT-l2u0tq734_lnlQhd1FCCNcLQmSGRoBdWBvHT0Nfdf93EVv1Czv_lOQ3bt8SLMjIyfZEwq4JuGJCAT8te5BLPJzYZ0Ykm1_yspr8FQiM37e2CyzVQzlf33vr21w7WtLtrt58-zzhfiQKP9wGcTLfUyv9CxYTTwUnz23Q"/>
+</div>
+<h3 class="font-display text-h2 text-on-surface mb-3">Settings</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">General system configuration and preferences.</p>
+</a>
+</div>
+<!-- Footer Meta -->
+<div class="mt-20 pt-8 border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center gap-4 text-on-surface-variant font-label-sm uppercase tracking-widest text-[10px]">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-brand-teal" data-icon="schedule">schedule</span>
+                    Last Server Sync: Today at 09:42 AM
+                </span>
+<span class="flex items-center gap-3 px-5 py-2 bg-brand-teal/10 text-brand-teal rounded-full border border-brand-teal/20">
+<span class="w-2 h-2 rounded-full bg-brand-teal animate-ping"></span>
+                    Network Integrity: Secure
+                </span>
+</div>
+</div>
+</main>
+</body></html>

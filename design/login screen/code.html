@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hamed Al Karbi Property Management - Secure Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500;600;700;800&amp;family=Sora:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-container": "#0f172a",
+                    "secondary-fixed-dim": "#b4c5ff",
+                    "on-tertiary-fixed-variant": "#574425",
+                    "secondary-fixed": "#dbe1ff",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed-variant": "#003ea8",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#fcdeb5",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#0d9488",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "primary": "#0f172a",
+                    "surface-container-low": "#f8fafc",
+                    "secondary": "#0d9488",
+                    "error": "#e11d48",
+                    "surface": "#ffffff",
+                    "on-secondary-fixed": "#00174b",
+                    "on-error-container": "#93000a",
+                    "secondary-container": "#3b82f6",
+                    "background": "#f8fafc",
+                    "tertiary-fixed-dim": "#dec29a",
+                    "surface-bright": "#ffffff",
+                    "inverse-on-surface": "#f3f0f2",
+                    "on-secondary-container": "#ffffff",
+                    "inverse-surface": "#303032",
+                    "on-tertiary-container": "#98805d",
+                    "surface-container-highest": "#e2e8f0",
+                    "primary-fixed": "#dae2fd",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#e2e8f0",
+                    "outline-variant": "#cbd5e1",
+                    "tertiary-container": "#271901",
+                    "surface-container-high": "#f1f5f9",
+                    "on-background": "#0f172a",
+                    "on-surface": "#0f172a",
+                    "on-primary-fixed": "#0f172a",
+                    "inverse-primary": "#bec6e0",
+                    "surface-variant": "#f1f5f9",
+                    "surface-container": "#f8fafc",
+                    "on-primary-container": "#1e293b",
+                    "on-surface-variant": "#475569",
+                    "outline": "#94a3b8",
+                    "on-tertiary-fixed": "#271901",
+                    "primary-fixed-dim": "#bec6e0",
+                    "tertiary": "#000000",
+                    "brand-teal": "#0d9488",
+                    "brand-berry": "#be123c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.5rem",
+                    "lg": "0.75rem",
+                    "xl": "1.25rem",
+                    "2xl": "2rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "8px",
+                    "gutter": "24px",
+                    "stack-md": "16px",
+                    "container-padding": "32px",
+                    "unit": "4px",
+                    "stack-lg": "24px"
+            },
+            "fontFamily": {
+                    "h2": ["Sora", "sans-serif"],
+                    "body-lg": ["Inter", "sans-serif"],
+                    "h1": ["Sora", "sans-serif"],
+                    "data-mono": ["Geist", "monospace"],
+                    "display": ["Sora", "sans-serif"],
+                    "body-md": ["Inter", "sans-serif"],
+                    "label-sm": ["Geist", "sans-serif"]
+            },
+            "fontSize": {
+                    "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "data-mono": ["14px", {"lineHeight": "1", "letterSpacing": "0", "fontWeight": "500"}],
+                    "display": ["42px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                    "body-md": ["15px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-sm": ["13px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .architectural-grid {
+            background-image: radial-gradient(circle at 2px 2px, rgba(13, 148, 136, 0.1) 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+        .brand-watermark {
+            background-image: repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(13, 148, 136, 0.02) 10px, rgba(13, 148, 136, 0.02) 11px);
+        }
+        .vibrant-gradient-border {
+            position: relative;
+            background: white;
+            background-clip: padding-box;
+            border: 2px solid transparent;
+        }
+        .vibrant-gradient-border::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            z-index: -1;
+            margin: -2px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, #0d9488, #be123c);
+        }
+        .infographic-silhouette {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            opacity: 0.03;
+            pointer-events: none;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-brand-teal/20 selection:text-brand-teal min-h-screen flex font-body-md">
+<!-- Left Side: High-Impact Visual Component -->
+<section class="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-primary-container">
+<div class="absolute inset-0 z-0">
+<img alt="Premium Architecture" class="w-full h-full object-cover opacity-40 transition-all duration-1000" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<!-- Overlay Texture -->
+<div class="absolute inset-0 z-10 architectural-grid opacity-30"></div>
+<div class="absolute inset-0 z-10 bg-gradient-to-t from-primary-container via-transparent to-transparent"></div>
+<!-- Content Overlay -->
+<div class="relative z-20 flex flex-col justify-between p-container-padding w-full">
+<div class="flex items-center gap-stack-sm">
+<div class="w-14 h-14 bg-white/10 backdrop-blur-md flex items-center justify-center rounded-2xl border border-white/20 shadow-2xl">
+<span class="material-symbols-outlined text-brand-teal text-[36px]">corporate_fare</span>
+</div>
+<div>
+<h1 class="font-display text-h1 text-white tracking-tighter leading-none">Hamed Al Karbi</h1>
+<p class="font-label-sm text-[10px] text-brand-teal font-black uppercase tracking-[0.4em] mt-1">Property Management</p>
+</div>
+</div>
+<div class="max-w-md">
+<blockquote class="mb-stack-lg border-l-4 border-brand-teal pl-6">
+<p class="font-h2 text-h2 text-white mb-stack-sm italic">"Precision in every square foot, excellence in every interaction."</p>
+<cite class="font-label-sm text-label-sm text-slate-400 not-italic uppercase tracking-widest">— Corporate Vision 2024</cite>
+</blockquote>
+<div class="flex gap-12 bg-white/5 backdrop-blur-sm p-8 rounded-3xl border border-white/10">
+<div class="flex flex-col">
+<span class="font-display text-4xl font-black text-white tracking-tighter">1.2B+</span>
+<span class="font-label-sm text-[10px] text-brand-teal font-black uppercase tracking-widest">Assets Managed</span>
+</div>
+<div class="w-[1px] bg-white opacity-20"></div>
+<div class="flex flex-col">
+<span class="font-display text-4xl font-black text-white tracking-tighter">99.8%</span>
+<span class="font-label-sm text-[10px] text-brand-teal font-black uppercase tracking-widest">Tenant Retention</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Side: Refined Login Form -->
+<main class="w-full lg:w-1/2 flex items-center justify-center p-container-padding bg-surface brand-watermark relative">
+<!-- Architectural Silhouette Background Element -->
+<div class="infographic-silhouette">
+<svg class="w-full h-auto" preserveaspectratio="none" viewbox="0 0 1000 200" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 200V150H50V100H100V160H150V120H200V200H0Z" fill="black"></path>
+<path d="M300 200V50H380V80H420V20H500V200H300Z" fill="black"></path>
+<path d="M700 200V100H750V80H800V120H850V50H950V200H700Z" fill="black"></path>
+</svg>
+</div>
+<div class="w-full max-w-[460px] space-y-stack-lg relative z-10">
+<!-- Mobile Logo (Visible only on small screens) -->
+<div class="lg:hidden flex items-center gap-stack-sm mb-stack-lg">
+<div class="w-10 h-10 bg-brand-teal rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[24px]">corporate_fare</span>
+</div>
+<h1 class="font-display text-h2 text-primary font-black tracking-tighter">Hamed Al Karbi</h1>
+</div>
+<header class="flex flex-col items-start">
+<div class="mb-6 group">
+<img alt="Dashboard Icon" class="w-24 h-24 object-contain drop-shadow-2xl transition-transform group-hover:scale-110 duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLv_eneOEJqdKg-D-DBjikazJVY6-SrAhj9NykxA5aAgI33fsRP8SYoLjfRet8vxCbeMFAQ_jJ6noqnoMrnqIkQRxN4Eq-dK5j-y1a-9bQVXLeACd8FD6-syI6QHNn5RODitFxelNvl_uXsBpsw6UxBsCGOtDf4MtZGGeNF__YCwJYNhVGSAVmU2-3fX3d1VnlzrIytr2mGI_aAhDBe2j_R0vAY2Vq2USSi1oambzjtg7anKIJNMNUqyMQ"/>
+</div>
+<h2 class="font-display text-display text-on-surface mb-2 tracking-tight">Welcome back</h2>
+<div class="h-1.5 w-16 bg-gradient-to-r from-brand-teal to-brand-berry rounded-full mb-6"></div>
+<p class="font-body-lg text-on-surface-variant max-w-sm">Access your executive dashboard to manage assets and portfolios.</p>
+</header>
+<!-- Login Form -->
+<form action="#" class="space-y-stack-md" onsubmit="event.preventDefault();">
+<div class="space-y-2">
+<label class="block font-label-sm text-[11px] text-brand-teal font-black uppercase tracking-widest" for="email">Corporate Email</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-brand-teal transition-colors">mail</span>
+<input class="w-full pl-14 pr-4 py-4 bg-white border-2 border-surface-container-highest rounded-2xl font-body-md text-on-surface focus:ring-0 focus:border-brand-teal transition-all outline-none placeholder:text-outline/60" id="email" name="email" placeholder="name@hkp-management.ae" required="" type="email"/>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="block font-label-sm text-[11px] text-brand-teal font-black uppercase tracking-widest" for="password">Access Key</label>
+<a class="font-label-sm text-xs text-brand-teal font-bold hover:underline transition-all" href="#">Forgot key?</a>
+</div>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-brand-teal transition-colors">lock</span>
+<input class="w-full pl-14 pr-12 py-4 bg-white border-2 border-surface-container-highest rounded-2xl font-body-md text-on-surface focus:ring-0 focus:border-brand-teal transition-all outline-none placeholder:text-outline/60" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute right-5 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface transition-colors" onclick="const p = document.getElementById('password'); p.type = p.type === 'password' ? 'text' : 'password';" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-3 py-2">
+<input class="w-5 h-5 rounded border-2 border-surface-container-highest text-brand-teal focus:ring-brand-teal cursor-pointer" id="remember" type="checkbox"/>
+<label class="font-body-md text-sm text-on-surface-variant font-medium cursor-pointer select-none" for="remember">Maintain session for 30 days</label>
+</div>
+<button class="w-full bg-primary text-white py-5 rounded-2xl font-display text-lg font-black hover:bg-brand-teal active:scale-[0.98] transition-all flex items-center justify-center gap-3 shadow-2xl shadow-primary/20 mt-4 group" type="submit">
+                    Secure Sign In
+                    <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+</form>
+<div class="pt-stack-lg border-t border-outline-variant/30 space-y-stack-md">
+<p class="font-body-md text-sm text-on-surface-variant text-center font-medium">
+                    New to the platform? 
+                    <a class="text-brand-teal font-black hover:underline" href="#">Contact Admin for Access</a>
+</p>
+<!-- Security Badges -->
+<div class="flex items-center justify-center gap-10">
+<div class="flex items-center gap-2 px-4 py-2 bg-brand-teal/5 text-brand-teal rounded-full border border-brand-teal/10">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span class="font-label-sm text-[10px] uppercase font-black tracking-widest">256-bit Encrypted</span>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 bg-slate-100 text-on-surface-variant rounded-full border border-outline-variant/20">
+<span class="material-symbols-outlined text-[18px]">shield</span>
+<span class="font-label-sm text-[10px] uppercase font-black tracking-widest">ISO 27001</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const inputs = document.querySelectorAll('input[type="email"], input[type="password"]');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                const icon = input.parentElement.querySelector('.material-symbols-outlined');
+                if (icon) icon.style.color = '#0d9488';
+            });
+            input.addEventListener('blur', () => {
+                const icon = input.parentElement.querySelector('.material-symbols-outlined');
+                if (icon) icon.style.color = '';
+            });
+        });
+
+        // Entrance animation
+        const formContent = document.querySelector('main > div');
+        formContent.style.opacity = '0';
+        formContent.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            formContent.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+            formContent.style.opacity = '1';
+            formContent.style.transform = 'translateY(0)';
+        }, 100);
+    });
+</script>
+</body></html>
