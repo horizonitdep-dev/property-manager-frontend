@@ -37,15 +37,6 @@ export const NAV_MODULES: NavModule[] = [
     enabled: true,
   },
   {
-    key: "properties",
-    label: "Properties",
-    description: "Portfolio inventory and high-level asset overview.",
-    icon: Building2,
-    href: "#",
-    enabled: false,
-    accentClassName: "text-blue-600",
-  },
-  {
     key: "buildings",
     label: "Buildings",
     description: "Structural management and facilities operation.",
@@ -53,6 +44,15 @@ export const NAV_MODULES: NavModule[] = [
     href: ROUTES.buildings,
     enabled: true,
     accentClassName: "text-slate-800",
+  },
+  {
+    key: "properties",
+    label: "Properties",
+    description: "Portfolio inventory and high-level asset overview.",
+    icon: Building2,
+    href: ROUTES.properties,
+    enabled: true,
+    accentClassName: "text-blue-600",
   },
   {
     key: "tenants",

@@ -23,15 +23,6 @@ export const SELECT_MODULES: SelectModule[] = [
     shadowClassName: "shadow-secondary/10",
   },
   {
-    key: "properties",
-    label: "Properties",
-    description: "Portfolio inventory and high-level asset overview.",
-    iconSrc: "/icons/properties.png",
-    href: "#",
-    enabled: false,
-    shadowClassName: "shadow-emerald-600/10",
-  },
-  {
     key: "buildings",
     label: "Buildings",
     description: "Structural management and facilities operation.",
@@ -39,6 +30,15 @@ export const SELECT_MODULES: SelectModule[] = [
     href: ROUTES.buildings,
     enabled: true,
     shadowClassName: "shadow-orange-600/10",
+  },
+  {
+    key: "properties",
+    label: "Properties",
+    description: "Portfolio inventory and high-level asset overview.",
+    iconSrc: "/icons/properties.png",
+    href: ROUTES.properties,
+    enabled: true,
+    shadowClassName: "shadow-emerald-600/10",
   },
   {
     key: "tenants",

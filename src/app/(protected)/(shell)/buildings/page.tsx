@@ -10,7 +10,7 @@ import {
   type SortingState,
 } from "@tanstack/react-table"
 import { keepPreviousData, useQuery } from "@tanstack/react-query"
-import { ArrowDown, ArrowUp, ArrowUpDown, ChevronLeft, ChevronRight, Pencil, Plus, Search, Trash2 } from "lucide-react"
+import { ArrowDown, ArrowUp, ArrowUpDown, ChevronLeft, ChevronRight, Eye, Pencil, Plus, Search, Trash2 } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -136,8 +136,13 @@ export default function BuildingsListPage() {
         header: "",
         enableSorting: false,
         cell: ({ row }) => (
-          <RoleGate allowedRoles={["MANAGER"]}>
-            <div className="flex justify-end gap-1">
+          <div className="flex justify-end gap-1">
+            <Button asChild variant="ghost" size="icon" aria-label={`View ${row.original.name}`}>
+              <Link href={ROUTES.buildingDetail(row.original.id)}>
+                <Eye className="h-4 w-4" />
+              </Link>
+            </Button>
+            <RoleGate allowedRoles={["MANAGER"]}>
               <Button asChild variant="ghost" size="icon" aria-label={`Edit ${row.original.name}`}>
                 <Link href={ROUTES.buildingEdit(row.original.id)}>
                   <Pencil className="h-4 w-4" />
@@ -151,8 +156,8 @@ export default function BuildingsListPage() {
               >
                 <Trash2 className="h-4 w-4 text-error" />
               </Button>
-            </div>
-          </RoleGate>
+            </RoleGate>
+          </div>
         ),
       },
     ],
@@ -223,7 +228,7 @@ export default function BuildingsListPage() {
                   const canSort = header.column.getCanSort()
                   const sortDir = header.column.getIsSorted()
                   return (
-                    <TableHead key={header.id} className={header.id === "actions" ? "w-20" : undefined}>
+                    <TableHead key={header.id} className={header.id === "actions" ? "w-32" : undefined}>
                       {header.isPlaceholder ? null : canSort ? (
                         <button
                           className="flex items-center gap-1 hover:text-on-surface"
