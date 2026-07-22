@@ -49,24 +49,26 @@ export default function BuildingDetailPage() {
   usePageHeader({
     title: building?.name ?? "Building",
     subtitle: building ? `${building.code} · ${building.city}` : "Building details",
-    actions: building ? (
-      <RoleGate allowedRoles={["MANAGER"]}>
-        <Button asChild variant="outline">
-          <Link href={ROUTES.buildingEdit(building.id)}>
-            <Pencil className="h-4 w-4" /> Edit
-          </Link>
-        </Button>
-      </RoleGate>
-    ) : undefined,
   })
 
   return (
     <div className="space-y-6">
-      <Button asChild variant="ghost" size="sm" className="-ml-3">
-        <Link href={ROUTES.buildings}>
-          <ArrowLeft className="h-4 w-4" /> Back to Buildings
-        </Link>
-      </Button>
+      <div className="flex items-center justify-between">
+        <Button asChild variant="ghost" size="sm" className="-ml-3">
+          <Link href={ROUTES.buildings}>
+            <ArrowLeft className="h-4 w-4" /> Back to Buildings
+          </Link>
+        </Button>
+        {building && (
+          <RoleGate allowedRoles={["MANAGER"]}>
+            <Button asChild variant="outline">
+              <Link href={ROUTES.buildingEdit(building.id)}>
+                <Pencil className="h-4 w-4" /> Edit
+              </Link>
+            </Button>
+          </RoleGate>
+        )}
+      </div>
 
       {buildingQuery.isLoading ? (
         <div className="space-y-4 rounded-xl border border-outline-variant bg-surface p-8">

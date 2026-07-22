@@ -40,31 +40,33 @@ export default function PropertyDetailPage() {
   usePageHeader({
     title: property ? `Unit ${property.unitNumber}` : "Property Unit",
     subtitle: property?.building ? property.building.name : "Property unit details",
-    actions: property ? (
-      <RoleGate allowedRoles={["MANAGER"]}>
-        <div className="flex gap-2">
-          <Button asChild variant="outline">
-            <Link href={ROUTES.propertyEdit(property.id)}>
-              <Pencil className="h-4 w-4" /> Edit
-            </Link>
-          </Button>
-          <Button variant="destructive" onClick={() => setConfirmingDelete(true)}>
-            <Trash2 className="h-4 w-4" /> Delete
-          </Button>
-        </div>
-      </RoleGate>
-    ) : undefined,
   })
 
   const showRooms = property ? !UNIT_TYPES_WITHOUT_ROOMS.includes(property.unitType) : true
 
   return (
     <div className="space-y-6">
-      <Button asChild variant="ghost" size="sm" className="-ml-3">
-        <Link href={ROUTES.properties}>
-          <ArrowLeft className="h-4 w-4" /> Back to Properties
-        </Link>
-      </Button>
+      <div className="flex items-center justify-between">
+        <Button asChild variant="ghost" size="sm" className="-ml-3">
+          <Link href={ROUTES.properties}>
+            <ArrowLeft className="h-4 w-4" /> Back to Properties
+          </Link>
+        </Button>
+        {property && (
+          <RoleGate allowedRoles={["MANAGER"]}>
+            <div className="flex gap-2">
+              <Button asChild variant="outline">
+                <Link href={ROUTES.propertyEdit(property.id)}>
+                  <Pencil className="h-4 w-4" /> Edit
+                </Link>
+              </Button>
+              <Button variant="destructive" onClick={() => setConfirmingDelete(true)}>
+                <Trash2 className="h-4 w-4" /> Delete
+              </Button>
+            </div>
+          </RoleGate>
+        )}
+      </div>
 
       {propertyQuery.isLoading ? (
         <div className="space-y-4 rounded-xl border border-outline-variant bg-surface p-8">
