@@ -16,8 +16,10 @@ export const propertyService = {
   },
 
   async listByBuilding(buildingId: string): Promise<Property[]> {
-    const response = await apiClient.get<ApiEnvelope<Property[]>>(`/buildings/${buildingId}/properties`)
-    return unwrap(response.data)
+    const response = await apiClient.get<ApiEnvelope<Paginated<Property>>>(`/buildings/${buildingId}/properties`, {
+      params: { limit: 100 },
+    })
+    return unwrap(response.data).items
   },
 
   async create(dto: CreatePropertyDto): Promise<Property> {

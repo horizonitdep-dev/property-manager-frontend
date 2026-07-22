@@ -175,8 +175,8 @@ export default function BuildingsListPage() {
     getCoreRowModel: getCoreRowModel(),
   })
 
-  const total = buildingsQuery.data?.total ?? 0
-  const totalPages = buildingsQuery.data?.totalPages ?? 1
+  const total = buildingsQuery.data?.meta.total ?? 0
+  const totalPages = buildingsQuery.data?.meta.totalPages ?? 1
 
   usePageHeader({
     title: "Buildings",

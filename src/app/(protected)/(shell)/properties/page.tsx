@@ -186,8 +186,8 @@ export default function PropertiesListPage() {
     getCoreRowModel: getCoreRowModel(),
   })
 
-  const total = propertiesQuery.data?.total ?? 0
-  const totalPages = propertiesQuery.data?.totalPages ?? 1
+  const total = propertiesQuery.data?.meta.total ?? 0
+  const totalPages = propertiesQuery.data?.meta.totalPages ?? 1
   const hasActiveFilters = Boolean(debouncedSearch) || buildingId !== "ALL" || unitType !== "ALL" || status !== "ALL"
 
   usePageHeader({

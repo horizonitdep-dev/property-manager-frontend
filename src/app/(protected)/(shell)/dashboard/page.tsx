@@ -131,7 +131,7 @@ export default function DashboardPage() {
                   <Skeleton className="h-12 w-20" />
                 ) : (
                   <h3 className="font-display text-5xl font-black tracking-tighter text-primary">
-                    {buildingsQuery.isError ? "—" : (buildingsQuery.data?.total ?? 0)}
+                    {buildingsQuery.isError ? "—" : (buildingsQuery.data?.meta.total ?? 0)}
                   </h3>
                 )
               ) : (
