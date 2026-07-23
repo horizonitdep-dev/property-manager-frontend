@@ -98,8 +98,8 @@ export function PropertyForm({ property, defaultBuildingId }: { property?: Prope
 
   return (
     <form className="space-y-stack-lg" onSubmit={handleSubmit(onSubmit)} noValidate>
-      <section className="overflow-hidden rounded-xl border border-outline-variant bg-surface">
-        <div className="flex items-center gap-2 border-b border-outline-variant bg-surface-container-low px-6 py-4">
+      <section className="rounded-xl border border-outline-variant bg-surface">
+        <div className="flex items-center gap-2 rounded-t-xl border-b border-outline-variant bg-surface-container-low px-6 py-4">
           <Info className="h-4 w-4 text-secondary" />
           <h3 className="font-display text-h2 text-on-surface">Unit Details</h3>
         </div>
@@ -161,8 +161,8 @@ export function PropertyForm({ property, defaultBuildingId }: { property?: Prope
         </div>
       </section>
 
-      <section className="overflow-hidden rounded-xl border border-outline-variant bg-surface">
-        <div className="flex items-center gap-2 border-b border-outline-variant bg-surface-container-low px-6 py-4">
+      <section className="rounded-xl border border-outline-variant bg-surface">
+        <div className="flex items-center gap-2 rounded-t-xl border-b border-outline-variant bg-surface-container-low px-6 py-4">
           <Wallet className="h-4 w-4 text-secondary" />
           <h3 className="font-display text-h2 text-on-surface">Specifications &amp; Financials</h3>
         </div>
