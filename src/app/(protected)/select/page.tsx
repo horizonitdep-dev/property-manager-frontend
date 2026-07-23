@@ -2,15 +2,9 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Bell, Building2, LogOut, Mail, Shield } from "lucide-react"
+import { Shield } from "lucide-react"
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { useLogout } from "@/hooks/use-logout"
+import { Header } from "@/components/layout/header"
 import { PageFade } from "@/components/page-fade"
 import { cn } from "@/lib/utils"
 import { SELECT_MODULES } from "@/lib/select-modules"
@@ -18,67 +12,12 @@ import { useAuthStore } from "@/store/auth-store"
 
 export default function SelectPage() {
   const user = useAuthStore((state) => state.user)
-  const logout = useLogout()
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="fixed inset-x-0 top-0 z-50 flex h-20 items-center justify-between border-b border-outline-variant/60 bg-surface/70 px-container-padding backdrop-blur-xl">
-        <div className="flex items-center gap-stack-md">
-          <div className="rounded-xl bg-secondary p-2.5 shadow-lg shadow-secondary/20">
-            <Building2 className="h-6 w-6 text-on-secondary" />
-          </div>
-          <div>
-            <h1 className="font-display text-h1 tracking-tight text-on-surface">Horizon</h1>
-            <p className="-mt-1 text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">
-              Property Management
-            </p>
-          </div>
-        </div>
+      <Header hideSearch hideHomeButton />
 
-        <div className="flex items-center gap-stack-lg">
-          <div className="flex items-center gap-stack-sm">
-            <button
-              type="button"
-              className="group relative flex h-10 w-10 items-center justify-center rounded-xl transition-all hover:bg-surface-container-low"
-              aria-label="Notifications"
-            >
-              <Bell className="h-5 w-5 text-on-surface-variant group-hover:text-secondary" />
-              <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-secondary ring-2 ring-white" />
-            </button>
-            <button
-              type="button"
-              className="group flex h-10 w-10 items-center justify-center rounded-xl transition-all hover:bg-surface-container-low"
-              aria-label="Messages"
-            >
-              <Mail className="h-5 w-5 text-on-surface-variant group-hover:text-secondary" />
-            </button>
-          </div>
-
-          <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-stack-md border-l border-outline-variant/50 pl-stack-lg outline-none">
-              <div className="hidden text-right sm:block">
-                <p className="text-label-sm text-on-surface">{user?.name ?? "—"}</p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-secondary">
-                  {user?.role ?? ""}
-                </p>
-              </div>
-              <div className="relative">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl border-2 border-secondary/20 bg-surface-container-high text-on-surface-variant shadow-md">
-                  {user?.name?.charAt(0).toUpperCase() ?? "?"}
-                </div>
-                <div className="absolute -bottom-1 -right-1 h-4 w-4 rounded-full border-2 border-white bg-emerald-500" />
-              </div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onSelect={() => void logout()} className="gap-2 text-error">
-                <LogOut className="h-4 w-4" /> Log out
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </header>
-
-      <main className="flex min-h-screen flex-col items-center px-container-padding pb-16 pt-32">
+      <main className="flex min-h-screen flex-col items-center px-container-padding pb-16 pt-16">
         <PageFade className="w-full max-w-7xl">
           <div className="mb-16 text-center">
             <h2 className="font-display text-display tracking-tight text-on-surface">Navigation Hub</h2>

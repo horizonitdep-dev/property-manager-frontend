@@ -15,7 +15,13 @@ import { useLogout } from "@/hooks/use-logout"
 import { ROUTES } from "@/lib/constants"
 import { useAuthStore } from "@/store/auth-store"
 
-export function Header() {
+export function Header({
+  hideSearch = false,
+  hideHomeButton = false,
+}: {
+  hideSearch?: boolean
+  hideHomeButton?: boolean
+} = {}) {
   const user = useAuthStore((state) => state.user)
   const logout = useLogout()
 
@@ -33,35 +39,39 @@ export function Header() {
             </p>
           </div>
 
-          <div className="relative hidden w-[450px] md:block">
-            <Search className="pointer-events-none absolute left-5 top-1/2 h-6 w-6 -translate-y-1/2 text-secondary" />
-            <input
-              type="text"
-              placeholder="Search portfolio assets…"
-              className="w-full rounded-2xl border-2 border-transparent bg-surface-container py-4 pl-14 pr-6 font-medium text-body-md placeholder:text-outline focus:border-secondary/30 focus:outline-none focus:ring-4 focus:ring-secondary/10"
-            />
-          </div>
+          {!hideSearch && (
+            <div className="relative hidden w-[450px] md:block">
+              <Search className="pointer-events-none absolute left-5 top-1/2 h-6 w-6 -translate-y-1/2 text-secondary" />
+              <input
+                type="text"
+                placeholder="Search portfolio assets…"
+                className="w-full rounded-2xl border-2 border-transparent bg-surface-container py-4 pl-14 pr-6 font-medium text-body-md placeholder:text-outline focus:border-secondary/30 focus:outline-none focus:ring-4 focus:ring-secondary/10"
+              />
+            </div>
+          )}
         </div>
 
         <div className="flex shrink-0 items-center gap-8">
           <div className="flex gap-4">
-            <Link
-              href={ROUTES.select}
-              className="flex h-12 w-12 items-center justify-center rounded-2xl bg-surface-container shadow-sm transition-all hover:bg-secondary hover:text-white"
-              aria-label="Navigation Hub"
-            >
-              <Home className="h-6 w-6" />
-            </Link>
+            {!hideHomeButton && (
+              <Link
+                href={ROUTES.select}
+                className="flex h-12 w-12 items-center justify-center rounded-full bg-surface-container shadow-sm transition-all hover:bg-secondary hover:text-white"
+                aria-label="Navigation Hub"
+              >
+                <Home className="h-6 w-6" />
+              </Link>
+            )}
             <button
               type="button"
-              className="flex h-12 w-12 items-center justify-center rounded-2xl bg-surface-container shadow-sm transition-all hover:bg-secondary hover:text-white"
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-surface-container shadow-sm transition-all hover:bg-secondary hover:text-white"
               aria-label="Notifications"
             >
               <Bell className="h-6 w-6" />
             </button>
             <button
               type="button"
-              className="flex h-12 w-12 items-center justify-center rounded-2xl bg-surface-container shadow-sm transition-all hover:bg-secondary hover:text-white"
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-surface-container shadow-sm transition-all hover:bg-secondary hover:text-white"
               aria-label="Messages"
             >
               <MessageSquare className="h-6 w-6" />
@@ -71,7 +81,7 @@ export function Header() {
           <div className="h-10 w-[2px] bg-outline-variant/50" />
 
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-5 rounded-xl pl-2 outline-none">
+            <DropdownMenuTrigger className="flex items-center gap-5 rounded-full pl-2 outline-none">
               <div className="text-right">
                 <p className="font-display text-base font-extrabold text-on-surface">{user?.name ?? "—"}</p>
                 <p className="mt-1 rounded-md bg-primary px-2 py-1 text-[10px] font-black uppercase tracking-widest text-white">
