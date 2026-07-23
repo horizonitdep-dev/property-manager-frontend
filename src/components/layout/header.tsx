@@ -1,6 +1,7 @@
 "use client"
 
-import { Bell, MessageSquare, Search, User } from "lucide-react"
+import Link from "next/link"
+import { Bell, Home, MessageSquare, Search, User } from "lucide-react"
 
 import {
   DropdownMenu,
@@ -11,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useLogout } from "@/hooks/use-logout"
+import { ROUTES } from "@/lib/constants"
 import { useAuthStore } from "@/store/auth-store"
 
 export function Header() {
@@ -43,6 +45,13 @@ export function Header() {
 
         <div className="flex shrink-0 items-center gap-8">
           <div className="flex gap-4">
+            <Link
+              href={ROUTES.select}
+              className="flex h-12 w-12 items-center justify-center rounded-2xl bg-surface-container shadow-sm transition-all hover:bg-secondary hover:text-white"
+              aria-label="Navigation Hub"
+            >
+              <Home className="h-6 w-6" />
+            </Link>
             <button
               type="button"
               className="flex h-12 w-12 items-center justify-center rounded-2xl bg-surface-container shadow-sm transition-all hover:bg-secondary hover:text-white"
