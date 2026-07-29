@@ -45,8 +45,8 @@ export const SELECT_MODULES: SelectModule[] = [
     label: "Tenants",
     description: "Resident profiles and CRM communication tools.",
     iconSrc: "/icons/tenants.png",
-    href: "#",
-    enabled: false,
+    href: ROUTES.tenants,
+    enabled: true,
     shadowClassName: "shadow-indigo-600/10",
   },
   {

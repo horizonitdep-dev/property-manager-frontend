@@ -59,8 +59,8 @@ export const NAV_MODULES: NavModule[] = [
     label: "Tenants",
     description: "Resident profiles and CRM communication tools.",
     icon: Users,
-    href: "#",
-    enabled: false,
+    href: ROUTES.tenants,
+    enabled: true,
     accentClassName: "text-sky-600",
   },
   {

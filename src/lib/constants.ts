@@ -23,6 +23,10 @@ export const ROUTES = {
   propertyNew: "/properties/new",
   propertyDetail: (id: string) => `/properties/${id}`,
   propertyEdit: (id: string) => `/properties/${id}/edit`,
+  tenants: "/tenants",
+  tenantNew: "/tenants/new",
+  tenantDetail: (id: string) => `/tenants/${id}`,
+  tenantEdit: (id: string) => `/tenants/${id}/edit`,
 } as const
 
 export const PUBLIC_ROUTES = [ROUTES.login]
@@ -34,4 +38,7 @@ export const QUERY_KEYS = {
   properties: (params?: unknown) => ["properties", params] as const,
   property: (id: string) => ["properties", id] as const,
   propertiesByBuilding: (buildingId: string) => ["properties", "byBuilding", buildingId] as const,
+  tenants: (params?: unknown) => ["tenants", params] as const,
+  tenant: (id: string) => ["tenants", id] as const,
+  tenantDocuments: (tenantId: string) => ["tenants", tenantId, "documents"] as const,
 }
