@@ -17,17 +17,17 @@ const config = {
     extend: {
       colors: {
         // shadcn/ui semantic aliases mapped onto the Horizon palette
-        border: "#CBD5E1",
-        input: "#CBD5E1",
-        ring: "#2563EB",
-        background: "#F8FAFC",
+        border: "#E3E7EE",
+        input: "#E3E7EE",
+        ring: "#0051D5",
+        background: "#FBFCFD",
         foreground: "#0F172A",
         primary: {
           DEFAULT: "#0F172A",
           foreground: "#FFFFFF",
         },
         secondary: {
-          DEFAULT: "#2563EB",
+          DEFAULT: "#0051D5",
           foreground: "#FFFFFF",
         },
         destructive: {
@@ -60,10 +60,10 @@ const config = {
         "surface-container-high": "#F1F5F9",
         "surface-container-highest": "#E2E8F0",
         "on-surface": "#0F172A",
-        "on-surface-variant": "#475569",
+        "on-surface-variant": "#5B6472",
         "on-background": "#0F172A",
-        outline: "#94A3B8",
-        "outline-variant": "#CBD5E1",
+        outline: "#8A93A3",
+        "outline-variant": "#E3E7EE",
         success: "#10B981",
         warning: "#F59E0B",
         error: "#E11D48",
