@@ -6,6 +6,17 @@ const PHONE_MESSAGE = "Enter a valid international phone number"
 const optionalString = (max: number) => z.string().max(max).optional().or(z.literal(""))
 const optionalPhone = z.string().regex(PHONE_REGEX, PHONE_MESSAGE).optional().or(z.literal(""))
 
+// <input type="date"> only ever yields a date-only "YYYY-MM-DD" string, but
+// the backend's Prisma DateTime columns require a full ISO-8601 datetime —
+// bare date-only strings fail with "premature end of input" on create/update.
+// Empty values become undefined (dropped from the JSON payload) rather than
+// "" — Prisma's DateTime columns reject an empty string the same way.
+const optionalDate = z
+  .string()
+  .optional()
+  .or(z.literal(""))
+  .transform((value) => (value ? `${value}T00:00:00.000Z` : undefined))
+
 const INDIVIDUAL_REQUIRED_FIELDS = [
   "emiratesIdNumber",
   "emiratesIdExpiry",
@@ -42,11 +53,11 @@ const tenantBaseSchema = z.object({
   email: z.string().email("Enter a valid email address").optional().or(z.literal("")),
   nationality: optionalString(100),
   emiratesIdNumber: optionalString(50),
-  emiratesIdExpiry: z.string().optional().or(z.literal("")),
+  emiratesIdExpiry: optionalDate,
   passportNumber: optionalString(50),
-  passportExpiry: z.string().optional().or(z.literal("")),
+  passportExpiry: optionalDate,
   tradeLicenseNumber: optionalString(50),
-  tradeLicenseExpiry: z.string().optional().or(z.literal("")),
+  tradeLicenseExpiry: optionalDate,
   authorizedPersonNameEn: optionalString(150),
   authorizedPersonNameAr: optionalString(150),
   authorizedPersonOccupation: optionalString(100),

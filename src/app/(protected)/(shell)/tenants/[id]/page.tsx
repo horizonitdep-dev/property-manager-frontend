@@ -28,7 +28,12 @@ function Field({ label, value, rtl }: { label: string; value: React.ReactNode; r
 }
 
 function formatDate(value?: string | null): string {
-  return value ? new Date(value).toLocaleDateString() : "—"
+  if (!value) return "—"
+  const date = new Date(value)
+  const day = String(date.getUTCDate()).padStart(2, "0")
+  const month = String(date.getUTCMonth() + 1).padStart(2, "0")
+  const year = date.getUTCFullYear()
+  return `${day}-${month}-${year}`
 }
 
 export default function TenantDetailPage() {
