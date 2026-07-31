@@ -7,7 +7,7 @@
     @apply border-outline-variant;
   }
   body {
-    @apply bg-background text-on-surface font-sans;
+    @apply bg-background text-on-surface font-sans tracking-[-0.01em] antialiased;
   }
 }
 
@@ -31,18 +31,24 @@
   background: #ffffff;
   border: 2px solid transparent;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .nav-hub-card:hover {
   transform: translateY(-4px);
-  background: #f8fafc;
-  border-color: #3b82f6;
+  background: #f3f5f8;
 }
 .nav-hub-card.active {
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  background: #0051d5;
   color: #ffffff;
-  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.3);
+  box-shadow: 0 20px 40px -10px rgba(0, 81, 213, 0.35);
   border: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-hub-card,
+  .nav-hub-card:hover {
+    transition: none;
+    transform: none;
+  }
 }
 
 .icon-vibrant {

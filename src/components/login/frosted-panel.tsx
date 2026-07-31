@@ -189,7 +189,7 @@ export function FrostedPanel() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: shouldReduceMotion ? 0 : 0.24, ease: EASE }}
           >
-            Executive Portal
+            Executive Dashboard
           </motion.span>
         </div>
 

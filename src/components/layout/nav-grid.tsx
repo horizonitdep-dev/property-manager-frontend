@@ -2,15 +2,22 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { motion, useReducedMotion } from "framer-motion"
 
 import { cn } from "@/lib/utils"
 import { NAV_MODULES } from "@/lib/nav-modules"
 
 export function NavGrid() {
   const pathname = usePathname()
+  const shouldReduceMotion = useReducedMotion()
 
   return (
-    <div className="mx-auto w-full max-w-[1700px] px-container-padding pt-10">
+    <motion.div
+      className="mx-auto w-full max-w-[1700px] px-container-padding pt-10"
+      initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: shouldReduceMotion ? 0 : 0.08, ease: [0.22, 1, 0.36, 1] }}
+    >
       <div className="grid grid-cols-2 gap-5 md:grid-cols-5 lg:grid-cols-10">
         {NAV_MODULES.map((module) => {
           const Icon = module.icon
@@ -28,7 +35,9 @@ export function NavGrid() {
                   Soon
                 </span>
                 <Icon className={cn("h-9 w-9", iconClassName)} />
-                <span className="font-label-sm">{module.label}</span>
+                <span className="font-label-sm" style={{ fontWeight: 500 }}>
+                  {module.label}
+                </span>
               </div>
             )
           }
@@ -48,6 +57,6 @@ export function NavGrid() {
           )
         })}
       </div>
-    </div>
+    </motion.div>
   )
 }

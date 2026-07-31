@@ -17,8 +17,9 @@ const config = {
     extend: {
       colors: {
         // shadcn/ui semantic aliases mapped onto the Horizon palette
-        border: "#E3E7EE",
-        input: "#E3E7EE",
+        // Values kept in sync with design/HorizonPM_Design_System_v2.md (section 2)
+        border: "#DDE1E8",
+        input: "#DDE1E8",
         ring: "#0051D5",
         background: "#FBFCFD",
         foreground: "#0F172A",
@@ -29,7 +30,9 @@ const config = {
         secondary: {
           DEFAULT: "#0051D5",
           foreground: "#FFFFFF",
+          press: "#0044B4",
         },
+        hover: "#F3F5F8",
         destructive: {
           DEFAULT: "#E11D48",
           foreground: "#FFFFFF",
@@ -59,14 +62,17 @@ const config = {
         "surface-container": "#F8FAFC",
         "surface-container-high": "#F1F5F9",
         "surface-container-highest": "#E2E8F0",
-        "on-surface": "#0F172A",
+        "on-surface": "#0C1420",
         "on-surface-variant": "#5B6472",
-        "on-background": "#0F172A",
+        "on-background": "#0C1420",
         outline: "#8A93A3",
-        "outline-variant": "#E3E7EE",
-        success: "#10B981",
+        "outline-variant": "#DDE1E8",
+        success: {
+          DEFAULT: "#16A34A",
+          ink: "#3B6B4A",
+        },
         warning: "#F59E0B",
-        error: "#E11D48",
+        error: "#FF3B30",
         "on-error": "#FFFFFF",
       },
       borderRadius: {
@@ -86,10 +92,10 @@ const config = {
         "stack-lg": "24px",
       },
       fontFamily: {
-        display: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
-        heading: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
+        display: ["var(--font-inter)", "system-ui", "sans-serif"],
+        heading: ["var(--font-inter)", "system-ui", "sans-serif"],
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        mono: ["var(--font-geist-mono)", "monospace"],
+        mono: ["ui-monospace", "SFMono-Regular", "monospace"],
       },
       fontSize: {
         display: ["32px", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "600" }],
