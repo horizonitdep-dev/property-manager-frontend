@@ -154,7 +154,7 @@ export function FrostedPanel() {
       {/* ROW 1: logo + status */}
       <div className="relative z-40 flex items-center gap-3">
         <motion.div
-          className="relative flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-[13px] bg-gradient-to-br from-secondary to-[#3B82F6] text-white shadow-[0_12px_24px_-8px_rgba(0,81,213,0.55)]"
+          className="relative flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-[13px] bg-gradient-to-br from-secondary to-[#3B82F6] text-white shadow-[0_12px_24px_-8px_rgba(37,105,230,0.55)]"
           initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.8, rotate: -8 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
           transition={{ duration: 0.6, delay: shouldReduceMotion ? 0 : 0.1, ease: EASE }}

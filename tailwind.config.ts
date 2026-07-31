@@ -30,7 +30,7 @@ const config = {
         secondary: {
           DEFAULT: "#2569E6",
           foreground: "#FFFFFF",
-          press: "#0044B4",
+          press: "#1E56C4",
         },
         hover: "#F3F5F8",
         destructive: {
