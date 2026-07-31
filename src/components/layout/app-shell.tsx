@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation"
 import { Header } from "@/components/layout/header"
 import { NavGrid } from "@/components/layout/nav-grid"
 import { PageHeaderSlot } from "@/components/layout/page-header-slot"
+import { RouteProgressBar } from "@/components/layout/route-progress-bar"
 import { PageFade } from "@/components/page-fade"
 
 export function AppShell({ children }: { children: React.ReactNode }) {
@@ -12,6 +13,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen bg-background">
+      <RouteProgressBar />
       <Header />
       <PageHeaderSlot />
       <NavGrid />

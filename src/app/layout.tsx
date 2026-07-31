@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { GeistSans } from "geist/font/sans"
 
 import "./globals.css"
 import { Providers } from "./providers"
@@ -18,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${GeistSans.variable} ${interLocal.variable} font-sans antialiased`}>
+      <body className={`${interLocal.variable} font-sans antialiased`}>
         <Providers>
           {children}
           <Toaster position="top-right" richColors />

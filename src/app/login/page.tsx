@@ -4,13 +4,16 @@ import * as React from "react"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { Building2, Eye, EyeOff, Lock, Mail, ShieldCheck } from "lucide-react"
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
+import { Building2, Check, Eye, EyeOff, Loader2, Lock, Mail, ShieldCheck } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { PageFade } from "@/components/page-fade"
+import { FrostedPanel } from "@/components/login/frosted-panel"
+import { StaggerGroup, StaggerItem } from "@/components/login/stagger-reveal"
 import { getErrorMessage } from "@/lib/get-error-message"
 import { setAuthCookie } from "@/lib/api-client"
 import { ROUTES } from "@/lib/constants"
@@ -18,12 +21,17 @@ import { loginSchema, type LoginFormValues } from "@/lib/validation/auth"
 import { authService } from "@/services/auth-service"
 import { useAuthStore } from "@/store/auth-store"
 
+const linkUnderline =
+  "relative after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-out hover:after:scale-x-100"
+
 export default function LoginPage() {
   const router = useRouter()
   const setSession = useAuthStore((state) => state.setSession)
+  const shouldReduceMotion = useReducedMotion()
   const [showPassword, setShowPassword] = React.useState(false)
   const [formError, setFormError] = React.useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = React.useState(false)
+  const [justSucceeded, setJustSucceeded] = React.useState(false)
 
   const {
     register,
@@ -44,77 +52,42 @@ export default function LoginPage() {
       })
       setSession({ user, accessToken, refreshToken })
       setAuthCookie()
+      setJustSucceeded(true)
+      await new Promise((resolve) => setTimeout(resolve, shouldReduceMotion ? 0 : 350))
       router.push(ROUTES.select)
     } catch (error) {
       setFormError(getErrorMessage(error, "Invalid email or password."))
-    } finally {
       setIsSubmitting(false)
     }
   }
 
   return (
     <PageFade className="flex min-h-screen bg-surface">
-      {/* Left: brand panel */}
-      <section className="relative hidden w-1/2 overflow-hidden bg-primary lg:flex lg:flex-col lg:justify-between lg:p-container-padding">
-        <div className="flex items-center gap-stack-sm">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/20 bg-white/10">
-            <Building2 className="h-6 w-6 text-secondary" />
-          </div>
-          <div>
-            <h1 className="font-display text-h1 leading-none tracking-tight text-white">Horizon</h1>
-            <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">
-              Property Management
-            </p>
-          </div>
-        </div>
-
-        <div className="max-w-md">
-          <blockquote className="mb-stack-lg border-l-4 border-secondary pl-6">
-            <p className="mb-stack-sm font-heading text-h2 italic text-white">
-              &ldquo;Precision in every square foot, excellence in every interaction.&rdquo;
-            </p>
-            <cite className="text-label-sm not-italic uppercase tracking-widest text-slate-400">
-              — Corporate Vision
-            </cite>
-          </blockquote>
-          <div className="flex gap-12 rounded-2xl border border-white/10 bg-white/5 p-8">
-            <div className="flex flex-col">
-              <span className="font-display text-4xl font-black tracking-tighter text-white">1.2B+</span>
-              <span className="text-[10px] font-black uppercase tracking-widest text-secondary">
-                Assets Managed
-              </span>
-            </div>
-            <div className="w-px bg-white/20" />
-            <div className="flex flex-col">
-              <span className="font-display text-4xl font-black tracking-tighter text-white">99.8%</span>
-              <span className="text-[10px] font-black uppercase tracking-widest text-secondary">
-                Tenant Retention
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Left: frosted interactive brand panel */}
+      <FrostedPanel />
 
       {/* Right: login form */}
       <main className="flex w-full items-center justify-center p-container-padding lg:w-1/2">
-        <div className="w-full max-w-[440px] space-y-stack-lg">
-          <div className="mb-stack-md flex items-center gap-stack-sm lg:hidden">
+        <StaggerGroup className="w-full max-w-[440px] space-y-stack-lg">
+          <StaggerItem className="mb-stack-md flex items-center gap-stack-sm lg:hidden">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
               <Building2 className="h-5 w-5 text-white" />
             </div>
             <h1 className="font-display text-h2 font-black tracking-tight text-primary">Horizon</h1>
-          </div>
+          </StaggerItem>
 
-          <header>
-            <h2 className="font-display text-display tracking-tight text-on-surface">Welcome back</h2>
-            <div className="mt-3 mb-stack-sm h-1.5 w-16 rounded-full bg-secondary" />
-            <p className="text-body-lg text-on-surface-variant">
-              Access your dashboard to manage assets and portfolios.
-            </p>
-          </header>
+          <StaggerItem>
+            <header>
+              <h2 className="font-display text-display tracking-tight text-on-surface">Welcome back</h2>
+              <div className="mt-3 mb-stack-sm h-1.5 w-16 rounded-full bg-secondary" />
+              <p className="text-body-lg text-on-surface-variant">
+                Access your dashboard to manage assets and portfolios.
+              </p>
+            </header>
+          </StaggerItem>
 
           <form className="space-y-stack-md" onSubmit={handleSubmit(onSubmit)} noValidate>
-            <div className="space-y-2">
+            <StaggerItem className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <div className="relative">
                 <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-outline" />
@@ -129,12 +102,12 @@ export default function LoginPage() {
                 />
               </div>
               {errors.email && <p className="text-sm text-error">{errors.email.message}</p>}
-            </div>
+            </StaggerItem>
 
-            <div className="space-y-2">
+            <StaggerItem className="space-y-2">
               <div className="flex items-center justify-between">
                 <Label htmlFor="password">Password</Label>
-                <a className="text-xs font-bold text-secondary hover:underline" href="#">
+                <a className={`text-xs font-bold text-secondary ${linkUnderline}`} href="#">
                   Forgot password?
                 </a>
               </div>
@@ -159,14 +132,14 @@ export default function LoginPage() {
                 </button>
               </div>
               {errors.password && <p className="text-sm text-error">{errors.password.message}</p>}
-            </div>
+            </StaggerItem>
 
-            <div className="flex items-center gap-3 py-2">
+            <StaggerItem className="flex items-center gap-3 py-2">
               <Checkbox id="remember" defaultChecked />
               <Label htmlFor="remember" className="cursor-pointer normal-case tracking-normal text-on-surface-variant">
                 Maintain session for 30 days
               </Label>
-            </div>
+            </StaggerItem>
 
             {formError && (
               <p role="alert" className="rounded-lg bg-error/10 px-4 py-3 text-sm font-medium text-error">
@@ -174,15 +147,52 @@ export default function LoginPage() {
               </p>
             )}
 
-            <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-              {isSubmitting ? "Signing in…" : "Sign In"}
-            </Button>
+            <StaggerItem>
+              <Button type="submit" variant="secondary" size="lg" className="w-full" disabled={isSubmitting}>
+                <AnimatePresence mode="wait" initial={false}>
+                  {justSucceeded ? (
+                    <motion.span
+                      key="success"
+                      className="flex items-center gap-2"
+                      initial={shouldReduceMotion ? false : { scale: 0.5, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.25, ease: "easeOut" }}
+                    >
+                      <Check className="h-4 w-4" />
+                      Signed in
+                    </motion.span>
+                  ) : isSubmitting ? (
+                    <motion.span
+                      key="loading"
+                      className="flex items-center gap-2"
+                      initial={shouldReduceMotion ? false : { opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={shouldReduceMotion ? undefined : { opacity: 0 }}
+                      transition={{ duration: 0.15 }}
+                    >
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      Signing in…
+                    </motion.span>
+                  ) : (
+                    <motion.span
+                      key="idle"
+                      initial={shouldReduceMotion ? false : { opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={shouldReduceMotion ? undefined : { opacity: 0 }}
+                      transition={{ duration: 0.15 }}
+                    >
+                      Sign In
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </Button>
+            </StaggerItem>
           </form>
 
-          <div className="space-y-stack-md border-t border-outline-variant/60 pt-stack-lg">
+          <StaggerItem className="space-y-stack-md border-t border-outline-variant/60 pt-stack-lg">
             <p className="text-center text-sm font-medium text-on-surface-variant">
               New to the platform?{" "}
-              <a className="font-black text-secondary hover:underline" href="#">
+              <a className={`font-black text-secondary ${linkUnderline}`} href="#">
                 Contact Admin for Access
               </a>
             </p>
@@ -192,8 +202,8 @@ export default function LoginPage() {
                 <span className="text-[10px] font-black uppercase tracking-widest">256-bit Encrypted</span>
               </div>
             </div>
-          </div>
-        </div>
+          </StaggerItem>
+        </StaggerGroup>
       </main>
     </PageFade>
   )
