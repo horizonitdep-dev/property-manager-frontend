@@ -38,10 +38,10 @@ interface TowerSpec {
 }
 
 const STROKE_BASE = "#5B7FD6"
-const HOVER_STROKE = "#0051D5"
+const HOVER_STROKE = "#2569E6"
 const FILL_BASE = "#6E8FDB"
 const GRID = "#7B96D8"
-const WINDOW_FILL = "#0051D5"
+const WINDOW_FILL = "#2569E6"
 const BEACON = "#FF3B30"
 const WASH = "#CFE0FF"
 

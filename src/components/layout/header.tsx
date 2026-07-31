@@ -44,7 +44,7 @@ export function Header({
           <div className="flex items-center gap-3">
             <div
               className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[13px] text-white shadow-[0_12px_24px_-8px_rgba(0,81,213,0.55)]"
-              style={{ background: "linear-gradient(135deg,#0051D5,#3B82F6)" }}
+              style={{ background: "linear-gradient(135deg,#2569E6,#3B82F6)" }}
             >
               <Building2 className="h-5 w-5" />
             </div>

@@ -20,7 +20,7 @@ const config = {
         // Values kept in sync with design/HorizonPM_Design_System_v2.md (section 2)
         border: "#DDE1E8",
         input: "#DDE1E8",
-        ring: "#0051D5",
+        ring: "#2569E6",
         background: "#FBFCFD",
         foreground: "#0F172A",
         primary: {
@@ -28,7 +28,7 @@ const config = {
           foreground: "#FFFFFF",
         },
         secondary: {
-          DEFAULT: "#0051D5",
+          DEFAULT: "#2569E6",
           foreground: "#FFFFFF",
           press: "#0044B4",
         },
