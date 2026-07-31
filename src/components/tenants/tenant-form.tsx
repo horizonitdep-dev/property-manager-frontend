@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
 import { AnimatedFieldGroup } from "@/components/tenants/animated-field-group"
+import { NationalityCombobox } from "@/components/tenants/nationality-combobox"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -323,11 +324,10 @@ export function TenantForm({ tenant }: { tenant?: Tenant }) {
             <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-2">
               <div className="col-span-full space-y-2">
                 <Label htmlFor="nationality">Nationality</Label>
-                <Input
+                <NationalityCombobox
                   id="nationality"
-                  placeholder="e.g. United Arab Emirates"
-                  {...register("nationality")}
-                  aria-invalid={!!errors.nationality}
+                  value={watch("nationality") ?? ""}
+                  onChange={(value) => setValue("nationality", value, { shouldValidate: true })}
                 />
                 {errors.nationality && <p className="text-sm text-error">{errors.nationality.message}</p>}
               </div>
