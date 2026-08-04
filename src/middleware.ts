@@ -2,7 +2,14 @@ import { NextResponse, type NextRequest } from "next/server"
 
 import { AUTH_COOKIE_NAME, ROUTES } from "@/lib/constants"
 
-const PROTECTED_PREFIXES = [ROUTES.select, ROUTES.dashboard, ROUTES.buildings, ROUTES.properties, ROUTES.tenants]
+const PROTECTED_PREFIXES = [
+  ROUTES.select,
+  ROUTES.dashboard,
+  ROUTES.buildings,
+  ROUTES.properties,
+  ROUTES.tenants,
+  ROUTES.contracts,
+]
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
@@ -25,5 +32,13 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/login", "/select", "/dashboard", "/buildings/:path*", "/properties/:path*", "/tenants/:path*"],
+  matcher: [
+    "/login",
+    "/select",
+    "/dashboard",
+    "/buildings/:path*",
+    "/properties/:path*",
+    "/tenants/:path*",
+    "/contracts/:path*",
+  ],
 }

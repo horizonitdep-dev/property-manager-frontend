@@ -68,9 +68,9 @@ export const NAV_MODULES: NavModule[] = [
     label: "Contracts",
     description: "Lease management and legal documentation.",
     icon: ShieldCheck,
-    href: "#",
-    enabled: false,
-    accentClassName: "text-indigo-600",
+    href: ROUTES.contracts,
+    enabled: true,
+    accentClassName: "text-amber-700",
   },
   {
     key: "finance",

@@ -11,8 +11,18 @@ import { RoleGate } from "@/components/role-gate"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 import { useTenant } from "@/hooks/queries/use-tenants"
+import { useTenantContracts } from "@/hooks/queries/use-contracts"
 import { usePageHeader } from "@/hooks/use-page-header"
+import { CONTRACT_STATUS_BADGE_CLASSNAME, CONTRACT_STATUS_LABELS } from "@/lib/contract-labels"
 import { ROUTES } from "@/lib/constants"
 import { TENANT_STATUS_BADGE_CLASSNAME, TENANT_STATUS_LABELS, TENANT_TYPE_LABELS } from "@/lib/tenant-labels"
 
@@ -43,6 +53,9 @@ export default function TenantDetailPage() {
 
   const tenantQuery = useTenant(params.id)
   const tenant = tenantQuery.data
+
+  const contractsQuery = useTenantContracts(params.id)
+  const contracts = contractsQuery.data ?? []
 
   usePageHeader({
     title: tenant?.nameEn ?? "Tenant",
@@ -149,6 +162,67 @@ export default function TenantDetailPage() {
                 </>
               )}
             </div>
+          </section>
+
+          <section className="overflow-hidden rounded-xl border border-outline-variant bg-surface">
+            <div className="border-b border-outline-variant bg-surface-container-low px-6 py-4">
+              <h3 className="font-display text-h2 text-on-surface">Contracts</h3>
+            </div>
+
+            {contractsQuery.isLoading ? (
+              <div className="space-y-3 p-6">
+                {Array.from({ length: 2 }).map((_, i) => (
+                  <Skeleton key={i} className="h-10 w-full" />
+                ))}
+              </div>
+            ) : contractsQuery.isError ? (
+              <div className="py-12 text-center">
+                <p className="mb-3 text-body-md text-error">Failed to load contracts for this tenant.</p>
+                <Button variant="outline" size="sm" onClick={() => contractsQuery.refetch()}>
+                  Retry
+                </Button>
+              </div>
+            ) : contracts.length === 0 ? (
+              <p className="py-12 text-center text-on-surface-variant">No contracts on file for this tenant yet.</p>
+            ) : (
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Contract #</TableHead>
+                    <TableHead>Property</TableHead>
+                    <TableHead>Start</TableHead>
+                    <TableHead>End</TableHead>
+                    <TableHead>Status</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {contracts.map((contract) => (
+                    <TableRow key={contract.id}>
+                      <TableCell>
+                        <Link
+                          href={ROUTES.contractDetail(contract.id)}
+                          className="font-mono text-data-mono text-on-surface hover:text-secondary"
+                        >
+                          {contract.contractNumber}
+                        </Link>
+                      </TableCell>
+                      <TableCell>
+                        <Link href={ROUTES.propertyDetail(contract.property.id)} className="hover:text-secondary">
+                          Unit {contract.property.unitNumber} — {contract.property.building.name}
+                        </Link>
+                      </TableCell>
+                      <TableCell className="font-mono text-data-mono">{formatDate(contract.startDate)}</TableCell>
+                      <TableCell className="font-mono text-data-mono">{formatDate(contract.endDate)}</TableCell>
+                      <TableCell>
+                        <Badge className={CONTRACT_STATUS_BADGE_CLASSNAME[contract.status]}>
+                          {CONTRACT_STATUS_LABELS[contract.status]}
+                        </Badge>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            )}
           </section>
 
           <TenantDocumentsSection tenantId={tenant.id} tenantType={tenant.tenantType} />

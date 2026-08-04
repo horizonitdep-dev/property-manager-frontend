@@ -54,9 +54,9 @@ export const SELECT_MODULES: SelectModule[] = [
     label: "Contracts",
     description: "Lease management and legal documentation.",
     iconSrc: "/icons/contracts.png",
-    href: "#",
-    enabled: false,
-    shadowClassName: "shadow-rose-600/10",
+    href: ROUTES.contracts,
+    enabled: true,
+    shadowClassName: "shadow-amber-600/10",
   },
   {
     key: "finance",
