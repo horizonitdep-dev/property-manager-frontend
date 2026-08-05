@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { motion, useReducedMotion } from "framer-motion"
-import { Bell, Building2, Home, MessageSquare, Search, User } from "lucide-react"
+import { Bell, Building2, Home, MessageSquare, Search, Upload, User } from "lucide-react"
 
 import {
   DropdownMenu,
@@ -79,6 +79,15 @@ export function Header({
                 aria-label="Navigation Hub"
               >
                 <Home className="h-6 w-6" />
+              </Link>
+            )}
+            {user?.role === "MANAGER" && (
+              <Link
+                href={ROUTES.import}
+                className="flex h-12 w-12 items-center justify-center rounded-full bg-surface-container shadow-sm transition-all hover:bg-secondary hover:text-white"
+                aria-label="Import Center"
+              >
+                <Upload className="h-6 w-6" />
               </Link>
             )}
             <button

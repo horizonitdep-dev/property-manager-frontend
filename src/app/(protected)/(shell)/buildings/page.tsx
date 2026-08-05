@@ -32,6 +32,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { DeleteBuildingDialog } from "@/components/buildings/delete-building-dialog"
+import { ImportButton } from "@/components/import/import-button"
 import { RoleGate } from "@/components/role-gate"
 import { BUILDING_TYPE_LABELS, BUILDING_TYPE_OPTIONS, CONSTRUCTION_STATUS_LABELS } from "@/lib/building-labels"
 import { QUERY_KEYS, ROUTES } from "@/lib/constants"
@@ -182,13 +183,16 @@ export default function BuildingsListPage() {
     title: "Buildings",
     subtitle: `${total} building${total === 1 ? "" : "s"} in your portfolio`,
     actions: (
-      <RoleGate allowedRoles={["MANAGER"]}>
-        <Button asChild>
-          <Link href={ROUTES.buildingNew}>
-            <Plus className="h-4 w-4" /> Register New Building
-          </Link>
-        </Button>
-      </RoleGate>
+      <div className="flex gap-2">
+        <ImportButton module="buildings" />
+        <RoleGate allowedRoles={["MANAGER"]}>
+          <Button asChild>
+            <Link href={ROUTES.buildingNew}>
+              <Plus className="h-4 w-4" /> Register New Building
+            </Link>
+          </Button>
+        </RoleGate>
+      </div>
     ),
   })
 

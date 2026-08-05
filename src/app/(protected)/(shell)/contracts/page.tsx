@@ -45,6 +45,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { DeleteContractDialog } from "@/components/contracts/delete-contract-dialog"
+import { ImportButton } from "@/components/import/import-button"
 import { TerminateContractDialog } from "@/components/contracts/terminate-contract-dialog"
 import { RoleGate } from "@/components/role-gate"
 import { useContracts } from "@/hooks/queries/use-contracts"
@@ -269,13 +270,16 @@ export default function ContractsListPage() {
     title: "Contracts",
     subtitle: `${total} contract${total === 1 ? "" : "s"} on file`,
     actions: (
-      <RoleGate allowedRoles={["MANAGER"]}>
-        <Button asChild>
-          <Link href={ROUTES.contractNew}>
-            <Plus className="h-4 w-4" /> Register New Contract
-          </Link>
-        </Button>
-      </RoleGate>
+      <div className="flex gap-2">
+        <ImportButton module="contracts" />
+        <RoleGate allowedRoles={["MANAGER"]}>
+          <Button asChild>
+            <Link href={ROUTES.contractNew}>
+              <Plus className="h-4 w-4" /> Register New Contract
+            </Link>
+          </Button>
+        </RoleGate>
+      </div>
     ),
   })
 

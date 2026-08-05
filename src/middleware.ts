@@ -9,6 +9,7 @@ const PROTECTED_PREFIXES = [
   ROUTES.properties,
   ROUTES.tenants,
   ROUTES.contracts,
+  ROUTES.import,
 ]
 
 export function middleware(request: NextRequest) {
@@ -40,5 +41,6 @@ export const config = {
     "/properties/:path*",
     "/tenants/:path*",
     "/contracts/:path*",
+    "/import/:path*",
   ],
 }

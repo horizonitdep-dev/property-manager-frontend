@@ -31,6 +31,7 @@ export const ROUTES = {
   contractNew: "/contracts/new",
   contractDetail: (id: string) => `/contracts/${id}`,
   contractEdit: (id: string) => `/contracts/${id}/edit`,
+  import: "/import",
 } as const
 
 export const PUBLIC_ROUTES = [ROUTES.login]
@@ -50,4 +51,5 @@ export const QUERY_KEYS = {
   contractsByProperty: (propertyId: string) => ["contracts", "byProperty", propertyId] as const,
   contractsByTenant: (tenantId: string) => ["contracts", "byTenant", tenantId] as const,
   contractDocuments: (contractId: string) => ["contracts", contractId, "documents"] as const,
+  importSession: (id: string) => ["import", "session", id] as const,
 }

@@ -32,6 +32,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { DeletePropertyDialog } from "@/components/properties/delete-property-dialog"
+import { ImportButton } from "@/components/import/import-button"
 import { RoleGate } from "@/components/role-gate"
 import { useProperties } from "@/hooks/queries/use-properties"
 import { useDebouncedValue } from "@/hooks/use-debounced-value"
@@ -194,13 +195,16 @@ export default function PropertiesListPage() {
     title: "Properties",
     subtitle: `${total} unit${total === 1 ? "" : "s"} in your portfolio`,
     actions: (
-      <RoleGate allowedRoles={["MANAGER"]}>
-        <Button asChild>
-          <Link href={ROUTES.propertyNew}>
-            <Plus className="h-4 w-4" /> Register New Unit
-          </Link>
-        </Button>
-      </RoleGate>
+      <div className="flex gap-2">
+        <ImportButton module="properties" />
+        <RoleGate allowedRoles={["MANAGER"]}>
+          <Button asChild>
+            <Link href={ROUTES.propertyNew}>
+              <Plus className="h-4 w-4" /> Register New Unit
+            </Link>
+          </Button>
+        </RoleGate>
+      </div>
     ),
   })
 

@@ -12,6 +12,7 @@ import {
 import { ArrowDown, ArrowUp, ArrowUpDown, ChevronLeft, ChevronRight, Eye, FileText, Pencil, Plus, Search, Trash2 } from "lucide-react"
 
 import { DeleteTenantDialog } from "@/components/tenants/delete-tenant-dialog"
+import { ImportButton } from "@/components/import/import-button"
 import { RoleGate } from "@/components/role-gate"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -183,13 +184,16 @@ export default function TenantsListPage() {
     title: "Tenants",
     subtitle: `${total} tenant${total === 1 ? "" : "s"} on file`,
     actions: (
-      <RoleGate allowedRoles={["MANAGER"]}>
-        <Button asChild>
-          <Link href={ROUTES.tenantNew}>
-            <Plus className="h-4 w-4" /> Register New Tenant
-          </Link>
-        </Button>
-      </RoleGate>
+      <div className="flex gap-2">
+        <ImportButton module="tenants" />
+        <RoleGate allowedRoles={["MANAGER"]}>
+          <Button asChild>
+            <Link href={ROUTES.tenantNew}>
+              <Plus className="h-4 w-4" /> Register New Tenant
+            </Link>
+          </Button>
+        </RoleGate>
+      </div>
     ),
   })
 
