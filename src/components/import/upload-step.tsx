@@ -124,7 +124,7 @@ export function UploadStep({
   return (
     <div className="space-y-6">
       <p className="text-body-md text-on-surface-variant">
-        Download a template, fill it in, and upload it here. We'll validate every row before anything is saved.
+        Download a template, fill it in, and upload it here. We&apos;ll validate every row before anything is saved.
       </p>
 
       <div className="flex flex-col gap-3 rounded-xl border border-outline-variant bg-surface-container-low p-4 sm:flex-row sm:items-center sm:justify-between">
