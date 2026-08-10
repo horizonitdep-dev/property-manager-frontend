@@ -54,6 +54,10 @@ function formatRent(amount: number) {
   return `AED ${Number(amount).toLocaleString(undefined, { maximumFractionDigits: 0 })}`
 }
 
+function formatAnnualRent(monthlyRent: number) {
+  return formatRent(Math.round(Number(monthlyRent) * 12))
+}
+
 export default function PropertiesListPage() {
   const [search, setSearch] = React.useState("")
   const [buildingId, setBuildingId] = React.useState<string | "ALL">("ALL")
@@ -132,6 +136,14 @@ export default function PropertiesListPage() {
         header: "Monthly Rent",
         enableSorting: true,
         cell: ({ row }) => <span className="font-mono text-data-mono">{formatRent(row.original.monthlyRent)}</span>,
+      },
+      {
+        id: "annualRent",
+        header: "Annual Rent",
+        enableSorting: false,
+        cell: ({ row }) => (
+          <span className="font-mono text-data-mono">{formatAnnualRent(row.original.monthlyRent)}</span>
+        ),
       },
       {
         accessorKey: "status",
