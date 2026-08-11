@@ -13,16 +13,22 @@ const SECONDARY = "#2569E6"
 const SUCCESS = "#16A34A"
 const IDLE_BG = "#F1F5F9"
 
-const STEPS = [
-  { step: 1, label: "Upload" },
-  { step: 2, label: "Preview" },
-  { step: 3, label: "Confirm" },
-] as const
+export interface WizardStepDef {
+  step: number
+  label: string
+}
 
-function StepNode({ step, current, shouldReduceMotion }: { step: 1 | 2 | 3; current: 1 | 2 | 3 | 4; shouldReduceMotion: boolean }) {
+function StepNode({
+  step,
+  current,
+  shouldReduceMotion,
+}: {
+  step: number
+  current: number
+  shouldReduceMotion: boolean
+}) {
   const isDone = current > step
   const isActive = current === step
-  const bg = isDone ? SUCCESS : isActive ? SECONDARY : IDLE_BG
 
   return (
     <div className="relative">
@@ -37,11 +43,21 @@ function StepNode({ step, current, shouldReduceMotion }: { step: 1 | 2 | 3; curr
         />
       )}
       <motion.div
-        className="relative flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold"
+        className="relative flex h-7 w-7 items-center justify-center overflow-hidden rounded-full text-xs font-bold"
         initial={false}
-        animate={{ backgroundColor: bg }}
+        animate={{ backgroundColor: isDone ? SUCCESS : IDLE_BG }}
         transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.3, ease: STANDARD }}
       >
+        {/* Shared layoutId lets the "active" fill glide between nodes instead
+            of each node independently fading its own background in place. */}
+        {isActive && (
+          <motion.div
+            layoutId="wizard-active-pill"
+            className="absolute inset-0 rounded-full"
+            style={{ backgroundColor: SECONDARY }}
+            transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.35, ease: STANDARD }}
+          />
+        )}
         <AnimatePresence mode="wait" initial={false}>
           {isDone ? (
             <motion.span
@@ -50,7 +66,7 @@ function StepNode({ step, current, shouldReduceMotion }: { step: 1 | 2 | 3; curr
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0, opacity: 0 }}
               transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.22, ease: SPRING }}
-              className="flex items-center justify-center text-white"
+              className="relative flex items-center justify-center text-white"
             >
               <Check className="h-4 w-4" />
             </motion.span>
@@ -61,7 +77,7 @@ function StepNode({ step, current, shouldReduceMotion }: { step: 1 | 2 | 3; curr
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.15 }}
-              className={cn(isActive ? "text-white" : "text-on-surface-variant")}
+              className={cn("relative", isActive ? "text-white" : "text-on-surface-variant")}
             >
               {step}
             </motion.span>
@@ -72,12 +88,25 @@ function StepNode({ step, current, shouldReduceMotion }: { step: 1 | 2 | 3; curr
   )
 }
 
-export function WizardStepper({ current }: { current: 1 | 2 | 3 | 4 }) {
+/**
+ * `steps === null` renders the unnumbered "Choose method" pill shown on the
+ * mode-picker step, before a numbered flow has been chosen.
+ */
+export function WizardStepper({ steps, current }: { steps: WizardStepDef[] | null; current: number }) {
   const shouldReduceMotion = !!useReducedMotion()
+
+  if (steps === null) {
+    return (
+      <div className="inline-flex items-center gap-2 rounded-full border border-outline-variant bg-surface-container-low px-3 py-1.5 text-[13px] font-semibold text-on-surface-variant">
+        <span className="h-2 w-2 rounded-full bg-secondary" />
+        Choose method
+      </div>
+    )
+  }
 
   return (
     <div className="flex items-center gap-3">
-      {STEPS.map(({ step, label }, index) => (
+      {steps.map(({ step, label }, index) => (
         <React.Fragment key={step}>
           {index > 0 && (
             <div className="relative h-0.5 w-[54px] overflow-hidden bg-outline-variant">

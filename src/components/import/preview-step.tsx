@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/table"
 import { BUILDING_TYPE_LABELS } from "@/lib/building-labels"
 import { QUERY_KEYS } from "@/lib/constants"
+import { formatCurrency, formatDate, str } from "@/lib/import-format"
 import { UNIT_TYPE_LABELS } from "@/lib/property-labels"
 import { TENANT_TYPE_LABELS } from "@/lib/tenant-labels"
 import { cn } from "@/lib/utils"
@@ -27,25 +28,6 @@ import type { UnitType } from "@/types/property"
 import type { TenantType } from "@/types/tenant"
 
 const PAGE_SIZE = 25
-
-function formatDate(value: unknown): string {
-  if (typeof value !== "string" || !value) return "—"
-  const date = new Date(value)
-  if (Number.isNaN(date.getTime())) return "—"
-  const day = String(date.getUTCDate()).padStart(2, "0")
-  const month = String(date.getUTCMonth() + 1).padStart(2, "0")
-  return `${day}-${month}-${date.getUTCFullYear()}`
-}
-
-function formatCurrency(value: unknown): string {
-  const amount = Number(value)
-  if (!value || Number.isNaN(amount)) return "—"
-  return `AED ${amount.toLocaleString(undefined, { maximumFractionDigits: 0 })}`
-}
-
-function str(value: unknown): string {
-  return typeof value === "string" && value ? value : "—"
-}
 
 /** Buildings/Properties/Tenants/Contracts reference lookups, fetched once per
  * preview so Properties/Contracts rows can show human labels instead of the

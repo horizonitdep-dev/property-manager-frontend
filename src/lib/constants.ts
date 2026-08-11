@@ -52,4 +52,5 @@ export const QUERY_KEYS = {
   contractsByTenant: (tenantId: string) => ["contracts", "byTenant", tenantId] as const,
   contractDocuments: (contractId: string) => ["contracts", contractId, "documents"] as const,
   importSession: (id: string) => ["import", "session", id] as const,
+  pdfImportSession: (id: string) => ["import", "pdf", "session", id] as const,
 }

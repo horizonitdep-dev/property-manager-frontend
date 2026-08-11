@@ -16,7 +16,7 @@ export function ImportButton({ module }: { module: ImportModuleKey }) {
       <Button type="button" variant="outline" onClick={() => setOpen(true)}>
         <Upload className="h-4 w-4" /> Import
       </Button>
-      <ImportWizard module={module} open={open} onOpenChange={setOpen} />
+      <ImportWizard preselectedModule={module} open={open} onOpenChange={setOpen} />
     </RoleGate>
   )
 }
