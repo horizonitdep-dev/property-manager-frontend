@@ -4,8 +4,6 @@ import * as React from "react"
 import { motion, useReducedMotion } from "framer-motion"
 import { FileText, Sparkles, Table2 } from "lucide-react"
 
-import { cn } from "@/lib/utils"
-
 const SPRING = [0.22, 1, 0.36, 1] as const
 
 export type ImportMode = "pdf" | "csv"
