@@ -3,6 +3,7 @@ import type { PropertyStatus, UnitType } from "@/types/property"
 export const UNIT_TYPE_LABELS: Record<UnitType, string> = {
   APARTMENT: "Apartment",
   STUDIO: "Studio",
+  VILLA: "Villa",
   SHOP: "Shop",
   OFFICE: "Office",
   ROOF_UNIT: "Roof Unit",

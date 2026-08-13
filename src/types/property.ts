@@ -1,4 +1,11 @@
-export type UnitType = "APARTMENT" | "STUDIO" | "SHOP" | "OFFICE" | "ROOF_UNIT" | "WAREHOUSE"
+export type UnitType =
+  | "APARTMENT"
+  | "STUDIO"
+  | "VILLA"
+  | "SHOP"
+  | "OFFICE"
+  | "ROOF_UNIT"
+  | "WAREHOUSE"
 export type PropertyStatus = "OCCUPIED" | "VACANT" | "UNDER_MAINTENANCE" | "RESERVED"
 
 export interface PropertyBuildingSummary {

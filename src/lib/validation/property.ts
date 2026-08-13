@@ -14,7 +14,7 @@ export const propertySchema = z.object({
   unitNumber: z.string().min(1, "Unit number is required").max(50),
   buildingId: z.string().uuid("Select a building"),
   floor: z.coerce.number({ message: "Floor is required" }).int("Floor must be a whole number"),
-  unitType: z.enum(["APARTMENT", "STUDIO", "SHOP", "OFFICE", "ROOF_UNIT", "WAREHOUSE"], {
+  unitType: z.enum(["APARTMENT", "STUDIO", "VILLA", "SHOP", "OFFICE", "ROOF_UNIT", "WAREHOUSE"], {
     message: "Select a unit type",
   }),
   bedrooms: optionalCount,
