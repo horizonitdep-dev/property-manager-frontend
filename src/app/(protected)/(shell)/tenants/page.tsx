@@ -46,7 +46,7 @@ import {
 } from "@/lib/tenant-labels"
 import type { TenantListItem, TenantSortField, TenantStatus, TenantType } from "@/types/tenant"
 
-const PAGE_SIZE = 10
+const PAGE_SIZE = 25
 
 export default function TenantsListPage() {
   const [search, setSearch] = React.useState("")

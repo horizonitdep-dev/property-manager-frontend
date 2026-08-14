@@ -41,7 +41,7 @@ import { usePageHeader } from "@/hooks/use-page-header"
 import { buildingService } from "@/services/building-service"
 import type { Building, BuildingSortField, BuildingType } from "@/types/building"
 
-const PAGE_SIZE = 10
+const PAGE_SIZE = 25
 
 export default function BuildingsListPage() {
   const [search, setSearch] = React.useState("")

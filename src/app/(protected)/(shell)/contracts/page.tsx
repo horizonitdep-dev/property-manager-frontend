@@ -62,7 +62,7 @@ import { QUERY_KEYS, ROUTES } from "@/lib/constants"
 import { buildingService } from "@/services/building-service"
 import type { ContractListItem, ContractSortField, ContractStatus, PaymentFrequency } from "@/types/contract"
 
-const PAGE_SIZE = 10
+const PAGE_SIZE = 25
 
 function formatDate(value: string): string {
   const date = new Date(value)

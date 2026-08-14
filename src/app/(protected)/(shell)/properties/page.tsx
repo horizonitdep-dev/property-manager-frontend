@@ -48,7 +48,7 @@ import {
 import { buildingService } from "@/services/building-service"
 import type { Property, PropertySortField, PropertyStatus, UnitType } from "@/types/property"
 
-const PAGE_SIZE = 10
+const PAGE_SIZE = 25
 
 function formatRent(amount: number) {
   return `AED ${Number(amount).toLocaleString(undefined, { maximumFractionDigits: 0 })}`
