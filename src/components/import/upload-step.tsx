@@ -137,6 +137,7 @@ export function UploadStep({
             type="button"
             variant="outline"
             size="sm"
+            className="!text-sm"
             disabled={isDownloading !== null}
             onClick={() => handleDownloadTemplate("csv")}
           >
@@ -146,6 +147,7 @@ export function UploadStep({
             type="button"
             variant="outline"
             size="sm"
+            className="!text-sm"
             disabled={isDownloading !== null}
             onClick={() => handleDownloadTemplate("xlsx")}
           >
