@@ -77,8 +77,10 @@ export const NAV_MODULES: NavModule[] = [
     label: "Finance",
     description: "Collections, disbursements, and financial audits.",
     icon: Wallet,
-    href: "#",
-    enabled: false,
+    // Points at Payments until the /finance overview lands — there is no
+    // /finance route yet, so ROUTES.finance would 404.
+    href: ROUTES.payments,
+    enabled: true,
     accentClassName: "text-emerald-600",
   },
   {

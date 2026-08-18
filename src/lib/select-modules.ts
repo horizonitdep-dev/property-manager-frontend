@@ -63,8 +63,9 @@ export const SELECT_MODULES: SelectModule[] = [
     label: "Finance",
     description: "Collections, disbursements, and financial audits.",
     iconSrc: "/icons/finance.png",
-    href: "#",
-    enabled: false,
+    // Points at Payments until the /finance overview lands.
+    href: ROUTES.payments,
+    enabled: true,
     shadowClassName: "shadow-cyan-600/10",
   },
   {
