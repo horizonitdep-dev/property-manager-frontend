@@ -4,9 +4,7 @@ import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tansta
 
 import { QUERY_KEYS } from "@/lib/constants"
 import { invalidateFinance } from "@/lib/finance-invalidation"
-import { paymentAttachmentService } from "@/services/payment-attachment-service"
 import { paymentService } from "@/services/payment-service"
-import type { FinanceAttachmentType } from "@/types/finance"
 import type { CreatePaymentDto, PaymentsQuery, UpdatePaymentDto } from "@/types/payment"
 
 export function usePayments(query: PaymentsQuery) {
@@ -71,40 +69,5 @@ export function useDeletePayment() {
   })
 }
 
-export function usePaymentAttachments(paymentId: string, options?: { enabled?: boolean }) {
-  return useQuery({
-    queryKey: QUERY_KEYS.finance.payments.attachments(paymentId),
-    queryFn: () => paymentAttachmentService.list(paymentId),
-    enabled: options?.enabled ?? !!paymentId,
-  })
-}
-
-export function useUploadPaymentAttachment(paymentId: string) {
-  const queryClient = useQueryClient()
-  return useMutation({
-    mutationFn: ({
-      file,
-      type,
-      onUploadProgress,
-    }: {
-      file: File
-      type?: FinanceAttachmentType
-      onUploadProgress?: (percent: number) => void
-    }) => paymentAttachmentService.upload(paymentId, file, type, onUploadProgress),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.finance.payments.attachments(paymentId) })
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.finance.payments.detail(paymentId) })
-    },
-  })
-}
-
-export function useDeletePaymentAttachment(paymentId: string) {
-  const queryClient = useQueryClient()
-  return useMutation({
-    mutationFn: (attachmentId: string) => paymentAttachmentService.remove(paymentId, attachmentId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.finance.payments.attachments(paymentId) })
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.finance.payments.detail(paymentId) })
-    },
-  })
-}
+// Attachments are shared across payments/cheques/expenses — see
+// @/hooks/queries/use-finance-attachments.

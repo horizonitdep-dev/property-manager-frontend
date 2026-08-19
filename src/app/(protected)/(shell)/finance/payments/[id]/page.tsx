@@ -5,8 +5,8 @@ import Link from "next/link"
 import { useParams, useRouter } from "next/navigation"
 import { ArrowLeft, Lock, Pencil, ReceiptText, Trash2 } from "lucide-react"
 
+import { AttachmentsSection } from "@/components/finance/attachments-section"
 import { DeletePaymentDialog } from "@/components/finance/delete-payment-dialog"
-import { PaymentAttachmentsSection } from "@/components/finance/payment-attachments-section"
 import { RoleGate } from "@/components/role-gate"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -192,7 +192,13 @@ export default function PaymentDetailPage() {
             </section>
           )}
 
-          <PaymentAttachmentsSection paymentId={payment.id} />
+          <AttachmentsSection
+            parent="payments"
+            parentId={payment.id}
+            title="Receipts &amp; Attachments"
+            defaultType="RECEIPT"
+            uploadPrompt="Drag &amp; drop receipts here"
+          />
 
           <DeletePaymentDialog
             payment={confirmingDelete ? payment : null}

@@ -21,7 +21,8 @@ export function NavGrid() {
       <div className="grid grid-cols-2 gap-5 md:grid-cols-5 lg:grid-cols-10">
         {NAV_MODULES.map((module) => {
           const Icon = module.icon
-          const isActive = module.enabled && (pathname === module.href || pathname.startsWith(`${module.href}/`))
+          const matchPrefix = module.matchPrefix ?? module.href
+          const isActive = module.enabled && (pathname === matchPrefix || pathname.startsWith(`${matchPrefix}/`))
           const iconClassName = isActive ? "text-white" : (module.accentClassName ?? "text-on-surface")
 
           if (!module.enabled) {
