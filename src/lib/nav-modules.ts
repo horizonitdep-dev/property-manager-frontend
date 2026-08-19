@@ -20,6 +20,12 @@ export interface NavModule {
   description: string
   icon: LucideIcon
   href: string
+  /**
+   * Path prefix that marks this module active. Defaults to `href`. Set it when a
+   * module spans routes outside its landing page — Finance links to
+   * /finance/payments but must stay lit on /finance/expenses too.
+   */
+  matchPrefix?: string
   enabled: boolean
   /** Resting-state icon color from the design; active state always forces white. */
   accentClassName?: string
@@ -80,6 +86,7 @@ export const NAV_MODULES: NavModule[] = [
     // Points at Payments until the /finance overview lands — there is no
     // /finance route yet, so ROUTES.finance would 404.
     href: ROUTES.payments,
+    matchPrefix: ROUTES.finance,
     enabled: true,
     accentClassName: "text-emerald-600",
   },
