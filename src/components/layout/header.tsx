@@ -1,9 +1,11 @@
 "use client"
 
+import * as React from "react"
 import Link from "next/link"
 import { motion, useReducedMotion } from "framer-motion"
 import { Bell, Building2, Home, MessageSquare, Search, Upload, User } from "lucide-react"
 
+import { ImportWizard } from "@/components/import/import-wizard"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,6 +28,7 @@ export function Header({
   const user = useAuthStore((state) => state.user)
   const logout = useLogout()
   const shouldReduceMotion = useReducedMotion()
+  const [importOpen, setImportOpen] = React.useState(false)
 
   return (
     <motion.header
@@ -81,14 +84,17 @@ export function Header({
                 <Home className="h-6 w-6" />
               </Link>
             )}
+            {/* Opens the wizard in place. The /import page still exists and hosts
+                the same wizard for anyone landing on it directly. */}
             {user?.role === "MANAGER" && (
-              <Link
-                href={ROUTES.import}
+              <button
+                type="button"
+                onClick={() => setImportOpen(true)}
                 className="flex h-12 w-12 items-center justify-center rounded-full bg-surface-container shadow-sm transition-all hover:bg-secondary hover:text-white"
                 aria-label="Import Center"
               >
                 <Upload className="h-6 w-6" />
-              </Link>
+              </button>
             )}
             <button
               type="button"
@@ -135,6 +141,8 @@ export function Header({
           </DropdownMenu>
         </div>
       </div>
+
+      {user?.role === "MANAGER" && <ImportWizard open={importOpen} onOpenChange={setImportOpen} />}
     </motion.header>
   )
 }
