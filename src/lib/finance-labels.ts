@@ -1,3 +1,4 @@
+import type { ChequeStatus } from "@/types/cheque"
 import type { ExpenseCategory, ExpenseSourceType } from "@/types/expense"
 import type { FinanceAttachmentType, PaymentMethod } from "@/types/finance"
 import type { PaymentKind } from "@/types/payment"
@@ -37,6 +38,30 @@ export const PAYMENT_METHOD_LABELS: Record<PaymentMethod, string> = {
 export const PAYMENT_METHOD_OPTIONS: { value: PaymentMethod; label: string }[] = (
   Object.keys(PAYMENT_METHOD_LABELS) as PaymentMethod[]
 ).map((value) => ({ value, label: PAYMENT_METHOD_LABELS[value] }))
+
+export const CHEQUE_STATUS_LABELS: Record<ChequeStatus, string> = {
+  HELD: "Held",
+  DEPOSITED: "Deposited",
+  CLEARED: "Cleared",
+  BOUNCED: "Bounced",
+  REPLACED: "Replaced",
+  CANCELLED: "Cancelled",
+}
+
+export const CHEQUE_STATUS_OPTIONS: { value: ChequeStatus; label: string }[] = (
+  Object.keys(CHEQUE_STATUS_LABELS) as ChequeStatus[]
+).map((value) => ({ value, label: CHEQUE_STATUS_LABELS[value] }))
+
+// Colours per spec §7.2. REPLACED and CANCELLED share the muted treatment —
+// both are terminal states that no longer need attention.
+export const CHEQUE_STATUS_BADGE_CLASSNAME: Record<ChequeStatus, string> = {
+  HELD: "border-transparent bg-slate-200 text-slate-700",
+  DEPOSITED: "border-transparent bg-blue-100 text-blue-700",
+  CLEARED: "border-transparent bg-emerald-100 text-emerald-700",
+  BOUNCED: "border-transparent bg-rose-100 text-rose-700",
+  REPLACED: "border-transparent bg-slate-100 text-slate-500",
+  CANCELLED: "border-transparent bg-slate-100 text-slate-500",
+}
 
 export const EXPENSE_CATEGORY_LABELS: Record<ExpenseCategory, string> = {
   MAINTENANCE: "Maintenance",

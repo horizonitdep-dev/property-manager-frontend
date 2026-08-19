@@ -46,6 +46,7 @@ export const ROUTES = {
   cheques: "/finance/cheques",
   chequeNew: "/finance/cheques/new",
   chequeDetail: (id: string) => `/finance/cheques/${id}`,
+  chequeEdit: (id: string) => `/finance/cheques/${id}/edit`,
   expenses: "/finance/expenses",
   expenseNew: "/finance/expenses/new",
   expenseDetail: (id: string) => `/finance/expenses/${id}`,

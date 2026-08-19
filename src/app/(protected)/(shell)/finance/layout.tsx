@@ -6,9 +6,10 @@ import { usePathname } from "next/navigation"
 import { ROUTES } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
-// Sub-modules currently built. Cheques and Reports join this list as they land.
+// Sub-modules currently built. Reports joins this list when it lands.
 const FINANCE_TABS = [
   { label: "Payments", href: ROUTES.payments },
+  { label: "Cheques", href: ROUTES.cheques },
   { label: "Expenses", href: ROUTES.expenses },
 ]
 
