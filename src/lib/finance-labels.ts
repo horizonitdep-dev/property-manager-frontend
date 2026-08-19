@@ -1,3 +1,4 @@
+import type { ExpenseCategory, ExpenseSourceType } from "@/types/expense"
 import type { FinanceAttachmentType, PaymentMethod } from "@/types/finance"
 import type { PaymentKind } from "@/types/payment"
 
@@ -36,6 +37,36 @@ export const PAYMENT_METHOD_LABELS: Record<PaymentMethod, string> = {
 export const PAYMENT_METHOD_OPTIONS: { value: PaymentMethod; label: string }[] = (
   Object.keys(PAYMENT_METHOD_LABELS) as PaymentMethod[]
 ).map((value) => ({ value, label: PAYMENT_METHOD_LABELS[value] }))
+
+export const EXPENSE_CATEGORY_LABELS: Record<ExpenseCategory, string> = {
+  MAINTENANCE: "Maintenance",
+  UTILITY: "Utility",
+  INSURANCE: "Insurance",
+  GOV_FEE: "Government Fee",
+  MUNICIPALITY_FEE: "Municipality Fee",
+  CLEANING: "Cleaning",
+  SECURITY: "Security",
+  MANAGEMENT: "Management",
+  LEGAL: "Legal",
+  SALARY: "Salary",
+  OTHER: "Other",
+}
+
+export const EXPENSE_CATEGORY_OPTIONS: { value: ExpenseCategory; label: string }[] = (
+  Object.keys(EXPENSE_CATEGORY_LABELS) as ExpenseCategory[]
+).map((value) => ({ value, label: EXPENSE_CATEGORY_LABELS[value] }))
+
+// Only GENERAL is creatable here; the others mark rows owned by another module.
+export const EXPENSE_SOURCE_TYPE_LABELS: Record<ExpenseSourceType, string> = {
+  GENERAL: "General",
+  WORK_ORDER: "Work Order",
+  UTILITY_BILL: "Utility Bill",
+  IMPORT: "Import",
+}
+
+export const EXPENSE_SOURCE_TYPE_OPTIONS: { value: ExpenseSourceType; label: string }[] = (
+  Object.keys(EXPENSE_SOURCE_TYPE_LABELS) as ExpenseSourceType[]
+).map((value) => ({ value, label: EXPENSE_SOURCE_TYPE_LABELS[value] }))
 
 export const FINANCE_ATTACHMENT_TYPE_LABELS: Record<FinanceAttachmentType, string> = {
   RECEIPT: "Receipt",
