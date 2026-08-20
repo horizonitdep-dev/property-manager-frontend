@@ -3,7 +3,8 @@ export type UserRole = "MANAGER" | "SECRETARY"
 export interface User {
   id: string
   email: string
-  name: string
+  /** Matches the backend's User.fullName — the API has never sent `name`. */
+  fullName: string
   role: UserRole
 }
 

@@ -23,7 +23,7 @@ export default function SelectPage() {
             <h2 className="font-display text-display tracking-tight text-on-surface">Navigation Hub</h2>
             <div className="mx-auto mb-6 mt-4 h-1.5 w-24 rounded-full bg-secondary" />
             <p className="mx-auto max-w-2xl text-body-lg text-on-surface-variant">
-              Welcome back, {user?.name ?? "there"}. Select a specialized module to manage your property
+              Welcome back, {user?.fullName ?? "there"}. Select a specialized module to manage your property
               portfolio with precision.
             </p>
           </div>

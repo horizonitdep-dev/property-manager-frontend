@@ -117,7 +117,7 @@ export function Header({
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-5 rounded-full pl-2 outline-none">
               <div className="text-right">
-                <p className="font-display text-base font-extrabold text-on-surface">{user?.name ?? "—"}</p>
+                <p className="font-display text-base font-extrabold text-on-surface">{user?.fullName ?? "—"}</p>
                 <p className="mt-1 inline-flex items-center rounded-full border border-outline-variant bg-white/55 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant backdrop-blur-sm">
                   {user?.role ?? ""}
                 </p>

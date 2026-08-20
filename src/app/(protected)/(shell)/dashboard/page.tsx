@@ -100,7 +100,9 @@ export default function DashboardPage() {
         Portfolio <span className="italic text-secondary">Overview</span>
       </>
     ),
-    subtitle: <>Welcome back{user?.name ? `, ${user.name}` : ""}. Here&apos;s a snapshot of your managed portfolio.</>,
+    subtitle: (
+      <>Welcome back{user?.fullName ? `, ${user.fullName}` : ""}. Here&apos;s a snapshot of your managed portfolio.</>
+    ),
   })
 
   return (
