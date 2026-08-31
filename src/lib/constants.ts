@@ -78,6 +78,7 @@ export const QUERY_KEYS = {
   contractDocuments: (contractId: string) => ["contracts", contractId, "documents"] as const,
   importSession: (id: string) => ["import", "session", id] as const,
   pdfImportSession: (id: string) => ["import", "pdf", "session", id] as const,
+  greenContractImportSession: (id: string) => ["import", "greenContract", "session", id] as const,
 
   // Finance keys are namespaced so a whole sub-module can be invalidated by its
   // `all` prefix. Cross-module invalidation is encoded once in

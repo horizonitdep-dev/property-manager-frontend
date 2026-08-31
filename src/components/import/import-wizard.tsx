@@ -7,6 +7,8 @@ import { ArrowLeft, X } from "lucide-react"
 
 import { DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { ConfirmStep } from "@/components/import/confirm-step"
+import { GreenConfirmStep } from "@/components/import/green-confirm-step"
+import { GreenUploadStep } from "@/components/import/green-upload-step"
 import { ModePickerStep, type ImportMode } from "@/components/import/mode-picker-step"
 import { ModuleSelectStep } from "@/components/import/module-select-step"
 import { PdfConfirmStep } from "@/components/import/pdf-confirm-step"
@@ -17,6 +19,7 @@ import { UploadStep } from "@/components/import/upload-step"
 import { WizardStepper, type WizardStepDef } from "@/components/import/wizard-stepper"
 import { getImportModuleConfig } from "@/lib/import-labels"
 import type { ImportModuleKey, ImportSession } from "@/types/import"
+import { toPreviewSession, type GreenContractImportSession } from "@/types/import-green-contract"
 import type { PdfImportSession } from "@/types/import-pdf"
 
 const SPRING = [0.22, 1, 0.36, 1] as const
@@ -53,6 +56,7 @@ export function ImportWizard({
   const [csvModule, setCsvModule] = React.useState<ImportModuleKey | null>(preselectedModule ?? null)
   const [csvSession, setCsvSession] = React.useState<ImportSession | null>(null)
   const [pdfSession, setPdfSession] = React.useState<PdfImportSession | null>(null)
+  const [greenSession, setGreenSession] = React.useState<GreenContractImportSession | null>(null)
   const [committed, setCommitted] = React.useState(false)
 
   const csvIncludesModuleStep = !preselectedModule
@@ -66,6 +70,7 @@ export function ImportWizard({
       setCsvModule(preselectedModule ?? null)
       setCsvSession(null)
       setPdfSession(null)
+      setGreenSession(null)
       setCommitted(false)
     }
   }, [open, preselectedModule])
@@ -82,7 +87,9 @@ export function ImportWizard({
         { step: 2, label: "Preview" },
         { step: 3, label: "Confirm" },
       ]
-  const stepperSteps = mode === "picker" ? null : mode === "pdf" ? PDF_STEPS : csvSteps
+  // Green uses the same three steps as the DMT flow.
+  const stepperSteps =
+    mode === "picker" ? null : mode === "pdf" || mode === "green" ? PDF_STEPS : csvSteps
 
   function goTo(nextStep: number) {
     setDirection(nextStep > step ? 1 : -1)
@@ -100,6 +107,7 @@ export function ImportWizard({
     setMode("picker")
     setCsvSession(null)
     setPdfSession(null)
+    setGreenSession(null)
     setCsvModule(preselectedModule ?? null)
     setCommitted(false)
   }
@@ -207,9 +215,50 @@ export function ImportWizard({
     return null
   }
 
+  // Same three steps as the DMT flow, wired to the Green endpoints. The preview
+  // is the DMT component itself — the row arrays are identical, so adapting the
+  // session beats duplicating the whole table.
+  function renderGreenStep() {
+    if (step === 1) {
+      return (
+        <GreenUploadStep
+          onValidated={(session) => {
+            setGreenSession(session)
+            goTo(2)
+          }}
+        />
+      )
+    }
+    if (step === 2 && greenSession) {
+      return (
+        <PdfPreviewStep
+          session={toPreviewSession(greenSession)}
+          onReupload={() => {
+            setGreenSession(null)
+            goTo(1)
+          }}
+          onCancel={() => onOpenChange(false)}
+          onContinue={() => goTo(3)}
+        />
+      )
+    }
+    if (step === 3 && greenSession) {
+      return (
+        <GreenConfirmStep
+          session={greenSession}
+          onBack={() => goTo(2)}
+          onCommitted={() => setCommitted(true)}
+          onClose={() => onOpenChange(false)}
+        />
+      )
+    }
+    return null
+  }
+
   function renderTitle() {
     if (mode === "picker") return "Import"
     if (mode === "pdf") return "Import from DMT PDFs"
+    if (mode === "green") return "Import Green Contract PDFs"
     if (!csvModule) return "Import"
     const config = getImportModuleConfig(csvModule)
     return (
@@ -303,7 +352,11 @@ export function ImportWizard({
                               exit="exit"
                               transition={shouldReduceMotion ? { duration: 0.15 } : STEP_TRANSITION}
                             >
-                              {mode === "csv" ? renderCsvStep() : renderPdfStep()}
+                              {mode === "csv"
+                                ? renderCsvStep()
+                                : mode === "green"
+                                  ? renderGreenStep()
+                                  : renderPdfStep()}
                             </motion.div>
                           </AnimatePresence>
                         </motion.div>

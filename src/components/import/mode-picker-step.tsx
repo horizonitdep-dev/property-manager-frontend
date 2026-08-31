@@ -2,11 +2,13 @@
 
 import * as React from "react"
 import { motion, useReducedMotion } from "framer-motion"
-import { FileText, Sparkles, Table2 } from "lucide-react"
+import { FileText, Sparkles, Table2, Tag } from "lucide-react"
+
+import { cn } from "@/lib/utils"
 
 const SPRING = [0.22, 1, 0.36, 1] as const
 
-export type ImportMode = "pdf" | "csv"
+export type ImportMode = "pdf" | "green" | "csv"
 
 function ModeCard({
   icon,
@@ -15,6 +17,7 @@ function ModeCard({
   description,
   selected,
   fading,
+  iconClassName,
   shouldReduceMotion,
   onClick,
 }: {
@@ -24,6 +27,8 @@ function ModeCard({
   description: string
   selected: boolean
   fading: boolean
+  /** Overrides the default secondary icon chip — Green Contracts use the success green. */
+  iconClassName?: string
   shouldReduceMotion: boolean | null
   onClick: () => void
 }) {
@@ -51,7 +56,12 @@ function ModeCard({
       )}
       {/* Muted hover shimmer — a working surface, not marketing chrome. */}
       <div className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-secondary/5 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary/10 text-secondary">
+      <div
+        className={cn(
+          "flex h-12 w-12 items-center justify-center rounded-xl bg-secondary/10 text-secondary",
+          iconClassName
+        )}
+      >
         {icon}
       </div>
       <div>
@@ -74,7 +84,9 @@ export function ModePickerStep({ onSelectMode }: { onSelectMode: (mode: ImportMo
 
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {/* DMT first (authoritative and most common), Green next as the sibling
+          PDF path, CSV/Excel last as the template-based option. */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <ModeCard
           icon={
             <span className="relative">
@@ -86,22 +98,38 @@ export function ModePickerStep({ onSelectMode }: { onSelectMode: (mode: ImportMo
           title="Import from DMT PDFs"
           description="Upload official DMT tenancy contracts. Buildings, properties, tenants, and contracts are extracted automatically for your review."
           selected={selecting === "pdf"}
-          fading={selecting === "csv"}
+          fading={selecting !== null && selecting !== "pdf"}
           shouldReduceMotion={shouldReduceMotion}
           onClick={() => handleSelect("pdf")}
+        />
+        <ModeCard
+          icon={
+            <span className="relative">
+              <FileText className="h-6 w-6" />
+              <Tag className="absolute -right-1.5 -top-1.5 h-3.5 w-3.5" />
+            </span>
+          }
+          chip="AI-assisted"
+          title="Import Green Contract PDFs"
+          description="Upload the client's internal tenancy contracts (R6-style). Buildings, properties, tenants, and contracts are extracted for your review."
+          selected={selecting === "green"}
+          fading={selecting !== null && selecting !== "green"}
+          iconClassName="bg-success/10 text-success"
+          shouldReduceMotion={shouldReduceMotion}
+          onClick={() => handleSelect("green")}
         />
         <ModeCard
           icon={<Table2 className="h-6 w-6" />}
           title="Import from CSV or Excel"
           description="Bulk import into a single module using a template. Available for Buildings, Properties, Tenants, and Contracts."
           selected={selecting === "csv"}
-          fading={selecting === "pdf"}
+          fading={selecting !== null && selecting !== "csv"}
           shouldReduceMotion={shouldReduceMotion}
           onClick={() => handleSelect("csv")}
         />
       </div>
       <p className="text-center text-sm text-on-surface-variant">
-        Both methods produce a preview before anything is created.
+        Every method produces a preview before anything is created.
       </p>
     </div>
   )
