@@ -80,7 +80,15 @@ export interface TerminateContractDto {
   reason?: string
 }
 
-export type ContractSortField = "contractNumber" | "startDate" | "endDate" | "annualRent" | "createdAt"
+/** "building" groups contracts by building and orders the units within each
+ * one. It is the list default; the others sort flat across all buildings. */
+export type ContractSortField =
+  | "building"
+  | "contractNumber"
+  | "startDate"
+  | "endDate"
+  | "annualRent"
+  | "createdAt"
 
 export interface ContractsQuery {
   page: number

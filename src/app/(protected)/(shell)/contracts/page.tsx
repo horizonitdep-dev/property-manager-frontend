@@ -84,7 +84,9 @@ export default function ContractsListPage() {
   const [startDateFrom, setStartDateFrom] = React.useState("")
   const [startDateTo, setStartDateTo] = React.useState("")
   const [page, setPage] = React.useState(1)
-  const [sorting, setSorting] = React.useState<SortingState>([{ id: "startDate", desc: true }])
+  // Empty on purpose: with no column sort active the query falls back to the
+  // building grouping. Seeding it with a column meant that default never applied.
+  const [sorting, setSorting] = React.useState<SortingState>([])
   const [contractPendingDelete, setContractPendingDelete] = React.useState<ContractListItem | null>(null)
   const [contractPendingTerminate, setContractPendingTerminate] = React.useState<ContractListItem | null>(null)
 
@@ -111,7 +113,9 @@ export default function ContractsListPage() {
     paymentFrequency: paymentFrequency === "ALL" ? undefined : paymentFrequency,
     startDateFrom: startDateFrom || undefined,
     startDateTo: startDateTo || undefined,
-    sortBy: (sort?.id as ContractSortField) ?? "startDate",
+    // Default groups the list by building and orders units within each one.
+    // Clicking a column header still sorts flat by that column.
+    sortBy: (sort?.id as ContractSortField) ?? "building",
     sortOrder: (sort?.desc ? "desc" : "asc") as "asc" | "desc",
   }
 
