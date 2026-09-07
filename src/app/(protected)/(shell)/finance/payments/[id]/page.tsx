@@ -116,7 +116,10 @@ export default function PaymentDetailPage() {
               />
               <Field label="Paid On" value={formatDate(payment.paidOn)} />
               <Field label="Method" value={PAYMENT_METHOD_LABELS[payment.method]} />
-              <Field label="Reference Number" value={payment.referenceNumber || "—"} />
+              <Field
+                label={payment.method === "CHEQUE" ? "Cheque Number" : "Reference Number"}
+                value={payment.referenceNumber || "—"}
+              />
               <Field label="Period Start" value={formatDate(payment.periodStart)} />
               <Field label="Period End" value={formatDate(payment.periodEnd)} />
             </div>

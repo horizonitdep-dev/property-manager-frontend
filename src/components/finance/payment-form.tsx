@@ -94,6 +94,10 @@ export function PaymentForm({
     },
   })
 
+  // For a cheque payment the reference number IS the cheque number, so the same
+  // field is labelled for what it actually holds.
+  const isCheque = watch("method") === "CHEQUE"
+
   // "Record payment" deep-links from a contract with ?contractId=… — fetch that
   // contract so the building and unit above it start out selected too.
   const prefillQuery = useContract(defaultContractId ?? "", {
@@ -373,10 +377,10 @@ export function PaymentForm({
           </div>
 
           <div className="space-y-2 md:col-span-2">
-            <Label htmlFor="referenceNumber">Reference Number</Label>
+            <Label htmlFor="referenceNumber">{isCheque ? "Cheque Number" : "Reference Number"}</Label>
             <Input
               id="referenceNumber"
-              placeholder="e.g. TRX-99881"
+              placeholder={isCheque ? "e.g. 000451" : "e.g. TRX-99881"}
               {...register("referenceNumber")}
               aria-invalid={!!errors.referenceNumber}
             />
