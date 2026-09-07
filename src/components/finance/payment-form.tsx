@@ -9,7 +9,7 @@ import { CalendarRange, FileText, Info, Lock, Wallet } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
-import { ContractCombobox } from "@/components/finance/contract-combobox"
+import { BuildingCombobox } from "@/components/properties/building-combobox"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -21,13 +21,15 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import { useContract, usePropertyContracts } from "@/hooks/queries/use-contracts"
 import { useCreatePayment, useUpdatePayment } from "@/hooks/queries/use-payments"
+import { usePropertiesByBuilding } from "@/hooks/queries/use-properties"
 import { QUERY_KEYS, ROUTES } from "@/lib/constants"
 import { PAYMENT_KIND_OPTIONS, PAYMENT_METHOD_OPTIONS } from "@/lib/finance-labels"
 import { getErrorMessage } from "@/lib/get-error-message"
 import { moneyToInputValue } from "@/lib/money"
 import { paymentSchema, type PaymentFormInput, type PaymentFormValues } from "@/lib/validation/payment"
-import { contractService } from "@/services/contract-service"
+import { buildingService } from "@/services/building-service"
 import type { Payment } from "@/types/payment"
 
 function toDateInputValue(value?: string | null): string {
@@ -51,17 +53,25 @@ export function PaymentForm({
    */
   const isChequeLocked = !!payment?.isChequeLinked
 
-  const contractsListQuery = {
-    page: 1,
-    limit: 100,
-    sortBy: "contractNumber" as const,
-    sortOrder: "asc" as const,
-  }
-  const contractsQuery = useQuery({
-    queryKey: QUERY_KEYS.contracts(contractsListQuery),
-    queryFn: () => contractService.list(contractsListQuery),
+  // The contract is picked in three steps — building, then unit, then that
+  // unit's contracts. Building and unit are local state: only contractId is
+  // part of the payment itself.
+  const [buildingId, setBuildingId] = React.useState("")
+  const [propertyId, setPropertyId] = React.useState("")
+
+  const buildingsListQuery = { page: 1, limit: 100, sortBy: "name" as const, sortOrder: "asc" as const }
+  const buildingsQuery = useQuery({
+    queryKey: QUERY_KEYS.buildings(buildingsListQuery),
+    queryFn: () => buildingService.list(buildingsListQuery),
+    enabled: !isEdit,
   })
-  const contracts = contractsQuery.data?.items ?? []
+  const buildings = buildingsQuery.data?.items ?? []
+
+  const propertiesQuery = usePropertiesByBuilding(buildingId, { enabled: !isEdit && !!buildingId })
+  const properties = propertiesQuery.data ?? []
+
+  const contractsQuery = usePropertyContracts(propertyId, { enabled: !isEdit && !!propertyId })
+  const contracts = contractsQuery.data ?? []
 
   const {
     register,
@@ -83,6 +93,29 @@ export function PaymentForm({
       notes: payment?.notes ?? "",
     },
   })
+
+  // "Record payment" deep-links from a contract with ?contractId=… — fetch that
+  // contract so the building and unit above it start out selected too.
+  const prefillQuery = useContract(defaultContractId ?? "", {
+    enabled: !isEdit && !!defaultContractId,
+  })
+  const prefillContract = prefillQuery.data
+  React.useEffect(() => {
+    if (!prefillContract) return
+    setBuildingId(prefillContract.property.building.id)
+    setPropertyId(prefillContract.property.id)
+  }, [prefillContract])
+
+  function selectBuilding(nextBuildingId: string) {
+    setBuildingId(nextBuildingId)
+    setPropertyId("")
+    setValue("contractId", "", { shouldValidate: false })
+  }
+
+  function selectProperty(nextPropertyId: string) {
+    setPropertyId(nextPropertyId)
+    setValue("contractId", "", { shouldValidate: false })
+  }
 
   const createMutation = useCreatePayment()
   const updateMutation = useUpdatePayment()
@@ -169,27 +202,95 @@ export function PaymentForm({
           <Info className="h-4 w-4 text-secondary" />
           <h3 className="font-display text-h2 text-on-surface">Contract</h3>
         </div>
-        <div className="p-6">
-          <div className="space-y-2">
-            <Label htmlFor="contractId">Contract</Label>
-            <ContractCombobox
-              id="contractId"
-              contracts={contracts}
-              value={watch("contractId")}
-              onChange={(contractId) => setValue("contractId", contractId, { shouldValidate: true })}
-              isLoading={contractsQuery.isLoading}
-              // The contract can never move after creation — the backend omits it
-              // from the update DTO entirely.
-              disabled={isEdit}
-            />
-            {isEdit && (
-              <p className="text-sm text-on-surface-variant">
-                A payment cannot be moved to another contract. Delete it and re-enter instead.
-              </p>
-            )}
-            {errors.contractId && <p className="text-sm text-error">{errors.contractId.message}</p>}
+        {isEdit ? (
+          // The contract can never move after creation — the backend omits it
+          // from the update DTO entirely — so it is shown, not offered.
+          <div className="space-y-4 p-6">
+            <dl className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              <div>
+                <dt className="text-sm text-on-surface-variant">Building</dt>
+                <dd className="text-body-md text-on-surface">
+                  {payment.contract
+                    ? `${payment.contract.property.building.name} (${payment.contract.property.building.code})`
+                    : "—"}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-sm text-on-surface-variant">Unit</dt>
+                <dd className="text-body-md text-on-surface">
+                  {payment.contract ? `Unit ${payment.contract.property.unitNumber}` : "—"}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-sm text-on-surface-variant">Contract</dt>
+                <dd className="text-body-md text-on-surface">
+                  {payment.contract
+                    ? `${payment.contract.contractNumber} — ${payment.contract.tenant.nameEn}`
+                    : "—"}
+                </dd>
+              </div>
+            </dl>
+            <p className="text-sm text-on-surface-variant">
+              A payment cannot be moved to another contract. Delete it and re-enter instead.
+            </p>
           </div>
-        </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-3">
+            <div className="space-y-2">
+              <Label htmlFor="buildingId">Building</Label>
+              <BuildingCombobox
+                id="buildingId"
+                buildings={buildings}
+                value={buildingId}
+                onChange={selectBuilding}
+                isLoading={buildingsQuery.isLoading}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="propertyId">Unit</Label>
+              <Select value={propertyId} disabled={!buildingId} onValueChange={selectProperty}>
+                <SelectTrigger id="propertyId">
+                  <SelectValue placeholder={buildingId ? "Select a unit…" : "Pick a building first"} />
+                </SelectTrigger>
+                <SelectContent>
+                  {properties.map((property) => (
+                    <SelectItem key={property.id} value={property.id}>
+                      Unit {property.unitNumber}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {buildingId && !propertiesQuery.isLoading && properties.length === 0 && (
+                <p className="text-sm text-on-surface-variant">This building has no units yet.</p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="contractId">Contract</Label>
+              <Select
+                value={watch("contractId")}
+                disabled={!propertyId}
+                onValueChange={(contractId) => setValue("contractId", contractId, { shouldValidate: true })}
+              >
+                <SelectTrigger id="contractId">
+                  <SelectValue placeholder={propertyId ? "Select a contract…" : "Pick a unit first"} />
+                </SelectTrigger>
+                <SelectContent>
+                  {contracts.map((contract) => (
+                    <SelectItem key={contract.id} value={contract.id}>
+                      {contract.contractNumber} — {contract.tenant.nameEn}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {propertyId && !contractsQuery.isLoading && contracts.length === 0 && (
+                <p className="text-sm text-on-surface-variant">This unit has no contracts yet.</p>
+              )}
+              {errors.contractId && <p className="text-sm text-error">{errors.contractId.message}</p>}
+            </div>
+          </div>
+        )}
       </section>
 
       <section className="rounded-xl border border-outline-variant bg-surface">
