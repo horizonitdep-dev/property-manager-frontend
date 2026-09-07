@@ -10,7 +10,7 @@ const optionalText = z.string().max(2000).optional().or(z.literal(""))
 export const paymentSchema = z
   .object({
     contractId: z.string().uuid("Select a contract"),
-    kind: z.enum(["RENT", "SECURITY_DEPOSIT", "LATE_FEE", "REFUND", "OTHER"], {
+    kind: z.enum(["RENT", "SECURITY_DEPOSIT", "LATE_FEE", "VAT", "REFUND", "OTHER"], {
       message: "Select a payment kind",
     }),
     // Positive, max two decimals — mirrors @IsPositive + maxDecimalPlaces: 2.

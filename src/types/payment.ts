@@ -1,6 +1,6 @@
 import type { FinanceAttachment, MoneyAmount, PaymentMethod } from "@/types/finance"
 
-export type PaymentKind = "RENT" | "SECURITY_DEPOSIT" | "LATE_FEE" | "REFUND" | "OTHER"
+export type PaymentKind = "RENT" | "SECURITY_DEPOSIT" | "LATE_FEE" | "VAT" | "REFUND" | "OTHER"
 
 export interface PaymentTenantSummary {
   id: string
