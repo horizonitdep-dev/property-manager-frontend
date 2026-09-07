@@ -24,7 +24,11 @@ export const contractService = {
   },
 
   async listByProperty(propertyId: string): Promise<Contract[]> {
-    const response = await apiClient.get<ApiEnvelope<Paginated<Contract>>>(`/properties/${propertyId}/contracts`)
+    // limit: the payment form picks a contract from this list, so it must not be
+    // cut off at the backend default of 10.
+    const response = await apiClient.get<ApiEnvelope<Paginated<Contract>>>(`/properties/${propertyId}/contracts`, {
+      params: { limit: 100 },
+    })
     return unwrap(response.data).items
   },
 
