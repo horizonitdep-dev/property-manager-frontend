@@ -7,6 +7,7 @@ export const PAYMENT_KIND_LABELS: Record<PaymentKind, string> = {
   RENT: "Rent",
   SECURITY_DEPOSIT: "Security Deposit",
   LATE_FEE: "Late Fee",
+  VAT: "VAT",
   REFUND: "Refund",
   OTHER: "Other",
 }
@@ -21,6 +22,7 @@ export const PAYMENT_KIND_BADGE_CLASSNAME: Record<PaymentKind, string> = {
   RENT: "border-transparent bg-emerald-100 text-emerald-700",
   SECURITY_DEPOSIT: "border-transparent bg-blue-100 text-blue-700",
   LATE_FEE: "border-transparent bg-amber-100 text-amber-700",
+  VAT: "border-transparent bg-violet-100 text-violet-700",
   REFUND: "border-transparent bg-rose-100 text-rose-700",
   OTHER: "border-transparent bg-slate-200 text-slate-700",
 }
